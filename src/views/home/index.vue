@@ -37,7 +37,15 @@
         </div>
       </div>
       <div class="img-animate">
-        <img class="big-bg" src="@/assets/images/line-circle.png" alt="" />
+        <hover-animate-box>
+          <template #default="{ getItemStyle }">
+            <img class="big-bg" src="@/assets/images/line-circle.png" alt="" />
+            <img class="big-group" src="@/assets/images/big-group.png" alt="" />
+            <!-- <img class="video" src="@/assets/images/Group_195.png" alt="" />
+            <img class="person" src="@/assets/images/id.png" alt="" />
+            <img class="direction" src="@/assets/images/Ethereum.png" alt="" /> -->
+          </template>
+        </hover-animate-box>
       </div>
       <hover-animate-box>
         <template #default="{ getItemStyle }">
@@ -169,6 +177,24 @@ export default {
       position: absolute;
       .big-bg {
         width: 668px;
+      }
+      .big-group {
+        right: 0;
+        top: 0;
+        position: absolute;
+        width: 826px;
+      }
+      .video {
+        position: absolute;
+        width: 376px;
+      }
+      .person {
+        position: absolute;
+        width: 85px;
+      }
+      .direction {
+        position: absolute;
+        width: 156px;
       }
     }
   }

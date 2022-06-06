@@ -24,7 +24,8 @@
       ref="box"
       class="box"
       @mousemove="handleMousemove"
-      @mouseout="handleMouseout"
+      @mouseenter="handleMouseenter"
+      @mouseleave="handleMouseleave"
       :style="{
         transform:
           'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(' +
@@ -50,6 +51,8 @@ export default {
       itemTranslateYPercent: 0,
       boxWidth: 0,
       boxHeight: 0,
+      // 有时移出后还会触发mousemove
+      isInBox: false,
     };
   },
   mounted() {
@@ -72,10 +75,15 @@ export default {
       );
     },
     handleMousemove: throttle(function (e) {
+      if (!this.isInBox) {
+        return;
+      }
       if (e.offsetX <= 0) {
+        this.clear();
         return;
       }
       if (e.offsetY <= 0) {
+        this.clear();
         return;
       }
       const halfWidth = this.boxWidth / 2;
@@ -96,9 +104,18 @@ export default {
         this.itemTranslateYPercent = (e.offsetY - halfHeight) / halfHeight;
       }
     }, 100),
-    handleMouseout() {
+    clear() {
       this.rotateX = 0;
       this.rotateY = 0;
+      this.itemTranslateXPercent = 0;
+      this.itemTranslateYPercent = 0;
+    },
+    handleMouseenter() {
+      this.isInBox = true;
+    },
+    handleMouseleave() {
+      this.isInBox = false;
+      this.clear();
     },
   },
 };
