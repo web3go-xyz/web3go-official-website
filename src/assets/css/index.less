@@ -1,0 +1,284 @@
+html,
+body {
+    font-family: "IBM Plex Sans", "Avenir", Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.medium {
+    font-weight: 500;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(38, 38, 38, 0.2);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #ededed;
+}
+
+.hover-item {
+    cursor: pointer;
+
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.common-table-option {
+    cursor: pointer;
+    color: #4318FF;
+
+    &:hover {
+        color: #2200B7;
+    }
+
+    &+.common-table-option {
+        margin-left: 10px;
+    }
+}
+
+.layout {
+    box-sizing: border-box;
+    width: 1274px;
+    margin: 0 auto;
+}
+
+ul li,
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#body {
+
+    // el-table样式修改
+    .el-table__body {
+        border-spacing: 0 4px;
+        background: transparent;
+    }
+
+    .el-table tr {
+        background: #F4F7FE;
+    }
+
+    .el-table .el-table__cell {
+        padding: 18px 0;
+    }
+
+    .el-table__header-wrapper tr th {
+        background: #7551FF;
+        font-size: 16px;
+        color: #FFFFFF;
+        font-weight: 500;
+
+        &:first-child {
+            border-top-left-radius: 20px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 20px;
+        }
+    }
+
+    .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+        background: #E9E3FF;
+    }
+
+    .el-table__header-wrapper tr {
+        border-radius: 10px;
+    }
+
+    .el-table td.el-table__cell,
+    .el-table th.el-table__cell.is-leaf {
+        border-color: transparent;
+    }
+
+    .el-table--border .el-table__inner-wrapper::after,
+    .el-table--border::after,
+    .el-table--border::before,
+    .el-table__inner-wrapper::before {
+        background-color: transparent;
+    }
+
+    .el-table__body tr.hover-row.current-row>td.el-table__cell,
+    .el-table__body tr.hover-row.el-table__row--striped.current-row>td.el-table__cell,
+    .el-table__body tr.hover-row.el-table__row--striped>td.el-table__cell,
+    .el-table__body tr.hover-row>td.el-table__cell {
+        background: transparent;
+    }
+
+    .el-table__body tr.hover-row {
+        border-radius: 10px;
+
+        td {
+
+            &:first-child {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+        }
+    }
+
+    .el-table__body td {
+        font-size: 16px;
+        color: #2B3674;
+        font-weight: 500;
+    }
+
+
+    .el-table__expand-column {
+        .cell {
+            padding: 0 0 0 12px;
+        }
+    }
+
+    .el-table .table-option-icon {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    .el-table__expanded-cell {
+        padding: 0 !important;
+    }
+
+    // pagination
+    .arco-pagination {
+        .arco-pagination-item:not(:last-child) {
+            margin-right: 4px;
+        }
+
+        .arco-pagination-item:not(.arco-pagination-item-previous, .arco-pagination-item-next) {
+            font-size: 14px;
+            color: #707EAE;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .arco-pagination-item-active,
+        .arco-pagination-item-active:hover {
+            border: 1px solid #4318FF !important;
+            border-radius: 4px;
+            color: #4318FF !important;
+            background: transparent;
+        }
+    }
+
+    // a-button
+    .arco-btn {
+        border-radius: 70px !important;
+    }
+
+    .arco-btn-text:hover,
+    .arco-btn-text[type='button']:hover,
+    .arco-btn-text[type='submit']:hover {
+        background: transparent;
+        color: #2200B7;
+    }
+
+    .arco-btn-text:active,
+    .arco-btn-text[type='button']:active,
+    .arco-btn-text[type='submit']:active {
+        background: #F4F7FE;
+    }
+
+    .arco-btn-outline:hover,
+    .arco-btn-outline[type='button']:hover,
+    .arco-btn-outline[type='submit']:hover {
+        color: #2200B7;
+        border-color: #2200B7;
+    }
+
+    .arco-btn-outline:active,
+    .arco-btn-outline[type='button']:active,
+    .arco-btn-outline[type='submit']:active {
+        box-shadow: 0 0 5px #4318FF;
+    }
+
+    // checkbox
+    .arco-checkbox-icon {
+        border-radius: 4px;
+        border-width: 1px;
+    }
+
+    .arco-checkbox-icon-check {
+        width: 10px;
+    }
+
+    .arco-checkbox .arco-checkbox-icon-hover::before {
+        background: transparent;
+    }
+
+    // tab
+    .arco-tabs-tab:first-child {
+        margin-left: 0;
+    }
+
+    .arco-tabs-nav-type-line .arco-tabs-tab:hover .arco-tabs-tab-title::before {
+        background: transparent;
+    }
+
+    .arco-tabs-nav-type-line .arco-tabs-tab:hover .arco-tabs-tab-title {
+        color: #4318FF !important;
+    }
+
+    .arco-tabs-nav::before {
+        display: none;
+    }
+
+    .arco-tabs-tab-title {
+        transition: all .2s;
+        font-weight: 700;
+        font-size: 24px;
+        color: #A3AED0;
+    }
+
+    .arco-tabs-tab-active,
+    .arco-tabs-tab-active:hover {
+        .arco-tabs-tab-title {
+            color: #4318FF;
+        }
+    }
+
+    // input
+    .arco-input-wrapper {
+        background: #f4f7fe;
+        border-radius: 10px;
+    }
+
+    // select
+    .arco-select {
+        background: #f4f7fe;
+        border-radius: 10px;
+        padding: 4px 20px;
+
+        .arco-select-view-input {
+            font-size: 16px;
+        }
+
+        .arco-select-view-value {
+            font-size: 16px;
+            color: #11047a;
+        }
+    }
+}
