@@ -9,6 +9,7 @@
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
+        "@element-plus/icons-vue": "^2.0.4",
         "@polkadot/vue-identicon": "^1.4.1",
         "axios": "^0.26.1",
         "bignumber.js": "^9.0.2",
@@ -16,9 +17,11 @@
         "dom-to-image": "^2.6.0",
         "echarts": "^5.3.2",
         "element-plus": "^2.1.7",
-        "moment": "^2.29.3",
         "ethereum-blockies-base64": "^1.0.2",
         "ethers": "^5.5.3",
+        "lodash.throttle": "^4.1.1",
+        "moment": "^2.29.3",
+        "sass-loader": "^8.0.0",
         "siwe": "^1.0.0",
         "swiper": "^6.7.5",
         "vue": "^3.0.0",
@@ -28,8 +31,8 @@
         "vuex": "^4.0.0-0"
     },
     "devDependencies": {
-        "@open-wc/webpack-import-meta-loader": "^0.4.7",
         "@arco-design/web-vue": "^2.21.2",
+        "@open-wc/webpack-import-meta-loader": "^0.4.7",
         "@vue/cli-plugin-babel": "~4.5.15",
         "@vue/cli-plugin-eslint": "~4.5.15",
         "@vue/cli-plugin-router": "~4.5.15",
@@ -41,6 +44,7 @@
         "eslint-plugin-vue": "^7.0.0",
         "less": "^3.0.4",
         "less-loader": "^5.0.0",
+        "sass": "^1.52.2",
         "unplugin-element-plus": "^0.3.3"
     }
 }

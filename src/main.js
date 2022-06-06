@@ -4,14 +4,11 @@ import router from './router'
 import store from './store'
 import ECharts from 'vue-echarts'
 import "echarts";
-import '@arco-design/web-vue/es/index.less';
-import ArcoVue from '@arco-design/web-vue';
-import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import '@/assets/font/font.css';
+import '@/assets/css/theme.scss'
 import '@/assets/css/index.less';
-import 'element-plus/es/components/table/style/css'
-import 'element-plus/es/components/table-column/style/css'
-import { ElTable, ElTableColumn } from 'element-plus'
+import ElementPlus from 'element-plus'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import moment from 'moment';
 import * as utils from '@/utils'
 
@@ -28,7 +25,8 @@ app.config.globalProperties.$utils = utils;
 app.config.globalProperties.$moment = moment;
 
 app.component('v-chart', ECharts)
-app.component(ElTable.name, ElTable);
-app.component(ElTableColumn.name, ElTableColumn);
 
-app.use(store).use(router).use(ArcoVue).use(ArcoVueIcon).mount('#app')
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
+app.use(store).use(router).use(ElementPlus).mount('#app')

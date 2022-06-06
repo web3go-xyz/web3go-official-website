@@ -9,18 +9,64 @@
             <font-flow :text="v"></font-flow>
           </div>
 
-          <a-button class="btn" type="primary">Start Today</a-button>
+          <el-button class="btn" type="primary">Start Today</el-button>
         </div>
       </div>
     </div>
+    <section class="video-section layout">
+      <div class="section-main">
+        <div class="big-text">
+          <div class="line1">Everyone can</div>
+          <div class="line2">play with</div>
+          <div class="line3">
+            <span class="blue">&lt;-</span>blockchain data<span class="blue"
+              >&gt;</span
+            >
+          </div>
+        </div>
+        <div class="small-text">
+          Web3Go is an open data analytics platform where everyone can grasp the
+          value behind blockchain data.
+        </div>
+        <div class="btn-wrap">
+          <img class="btn-bg" src="@/assets/images/btn-bg.png" alt="" />
+          <el-button class="btn" type="primary">
+            <span>Start</span>
+            <img class="arrow" src="@/assets/images/arrowRight.png" alt="" />
+          </el-button>
+        </div>
+      </div>
+      <div class="img-animate">
+        <img class="big-bg" src="@/assets/images/line-circle.png" alt="" />
+      </div>
+      <hover-animate-box>
+        <template #default="{ getItemStyle }">
+          <div
+            style="
+              width: 300px;
+              height: 300px;
+              padding: 100px;
+              background: blue;
+            "
+          >
+            <div
+              style="width: 50px; height: 50px; background: red"
+              :style="getItemStyle(10)"
+            ></div>
+          </div>
+        </template>
+      </hover-animate-box>
+    </section>
   </div>
 </template>
 
 <script>
+import HoverAnimateBox from "@/components/HoverAnimateBox";
 import FontFlow from "@/components/FontFlow";
 export default {
   components: {
     FontFlow,
+    HoverAnimateBox,
   },
   data() {
     return {
@@ -41,14 +87,15 @@ export default {
       justify-content: space-between;
       position: relative;
       .bg-circle {
-        height: 213px;
+        pointer-events: none;
+        height: 240px;
         width: auto;
         position: absolute;
         top: -28px;
-        left: -84px;
+        left: -100px;
       }
       .logo {
-        z-index: 2;
+        z-index: 1;
         height: 40px;
         width: auto;
       }
@@ -68,8 +115,60 @@ export default {
           height: 44px;
           padding: 0 36px;
           margin-left: 20px;
-          box-shadow: 0px 40px 58px -20px rgba(112, 144, 176, 0.12);
+          box-shadow: 0px 15px 21px -2px rgb(202 198 248);
         }
+      }
+    }
+  }
+  .video-section {
+    position: relative;
+    .section-main {
+      .big-text {
+        font-weight: 600;
+        font-size: 68px;
+        color: #121619;
+        padding-top: 160px;
+        .blue {
+          color: #4318ff;
+        }
+        .line2 {
+          margin-left: 142px;
+        }
+      }
+      .small-text {
+        margin-top: 30px;
+        font-weight: 400;
+        font-size: 24px;
+        color: #343a3f;
+        width: 475px;
+      }
+      .btn-wrap {
+        margin-top: 40px;
+        position: relative;
+        .btn-bg {
+          position: absolute;
+          pointer-events: none;
+          width: 545px;
+          top: -266px;
+          left: -220px;
+        }
+        .btn {
+          box-shadow: 0px 15px 21px -2px rgb(202 198 248);
+          height: 44px;
+          width: 141px;
+          .arrow {
+            width: 6px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+    .img-animate {
+      top: 65px;
+      right: -10px;
+      position: absolute;
+      .big-bg {
+        width: 668px;
       }
     }
   }
