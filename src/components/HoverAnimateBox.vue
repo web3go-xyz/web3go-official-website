@@ -1,27 +1,8 @@
 
 
 <template>
-  <!-- demo use
-    <hover-animate-box>
-        <template #default="{ getItemStyle }">
-          <div
-            style="
-              width: 300px;
-              height: 300px;
-              padding: 100px;
-              background: blue;
-            "
-          >
-            <div
-              style="width: 50px; height: 50px; background: red"
-              :style="getItemStyle(10)"
-            ></div>
-          </div>
-        </template>
-      </hover-animate-box> -->
-  <div class="box-wrap">
+  <div ref="boxWrap" class="box-wrap">
     <div
-      ref="box"
       class="box"
       @mousemove="handleMousemove"
       @mouseenter="handleMouseenter"
@@ -56,12 +37,12 @@ export default {
     };
   },
   mounted() {
-    this.boxWidth = this.boxRef.offsetWidth;
-    this.boxHeight = this.boxRef.offsetHeight;
+    this.boxWidth = this.boxWrapRef.offsetWidth;
+    this.boxHeight = this.boxWrapRef.offsetHeight;
   },
   computed: {
-    boxRef() {
-      return this.$refs.box;
+    boxWrapRef() {
+      return this.$refs.boxWrap;
     },
   },
   methods: {
@@ -74,36 +55,49 @@ export default {
         "px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);"
       );
     },
+    getOffsetOfDocument(element) {
+      var pos = { left: 0, top: 0 };
+
+      var parents = element.offsetParent;
+
+      pos.left += element.offsetLeft;
+      pos.top += element.offsetTop;
+
+      while (parents && !/html|body/i.test(parents.tagName)) {
+        pos.left += parents.offsetLeft;
+        pos.top += parents.offsetTop;
+
+        parents = parents.offsetParent;
+      }
+      return pos;
+    },
     handleMousemove: throttle(function (e) {
       if (!this.isInBox) {
         return;
       }
-      if (e.offsetX <= 0) {
-        this.clear();
-        return;
-      }
-      if (e.offsetY <= 0) {
-        this.clear();
-        return;
-      }
+      // 子元素冒泡会影响e.offectX，所以只能自己计算
+      const boxWrapOffset = this.getOffsetOfDocument(this.boxWrapRef);
+      const offsetX = e.pageX - boxWrapOffset.left;
+      const offsetY = e.pageY - boxWrapOffset.top;
+
       const halfWidth = this.boxWidth / 2;
       const halfHeight = this.boxHeight / 2;
 
-      if (e.offsetX < halfWidth) {
-        this.rotateY = (-5 * (halfWidth - e.offsetX)) / halfWidth;
-        this.itemTranslateXPercent = -(halfWidth - e.offsetX) / halfWidth;
-      } else if (e.offsetX > halfWidth) {
-        this.rotateY = (5 * (e.offsetX - halfWidth)) / halfWidth;
-        this.itemTranslateXPercent = (e.offsetX - halfWidth) / halfWidth;
+      if (offsetX < halfWidth) {
+        this.rotateY = (-5 * (halfWidth - offsetX)) / halfWidth;
+        this.itemTranslateXPercent = -(halfWidth - offsetX) / halfWidth;
+      } else if (offsetX > halfWidth) {
+        this.rotateY = (5 * (offsetX - halfWidth)) / halfWidth;
+        this.itemTranslateXPercent = (offsetX - halfWidth) / halfWidth;
       }
-      if (e.offsetY < halfHeight) {
-        this.rotateX = (5 * (halfHeight - e.offsetY)) / halfHeight;
-        this.itemTranslateYPercent = -(halfHeight - e.offsetY) / halfHeight;
-      } else if (e.offsetY > halfHeight) {
-        this.rotateX = (-5 * (e.offsetY - halfHeight)) / halfHeight;
-        this.itemTranslateYPercent = (e.offsetY - halfHeight) / halfHeight;
+      if (offsetY < halfHeight) {
+        this.rotateX = (5 * (halfHeight - offsetY)) / halfHeight;
+        this.itemTranslateYPercent = -(halfHeight - offsetY) / halfHeight;
+      } else if (offsetY > halfHeight) {
+        this.rotateX = (-5 * (offsetY - halfHeight)) / halfHeight;
+        this.itemTranslateYPercent = (offsetY - halfHeight) / halfHeight;
       }
-    }, 100),
+    }, 50),
     clear() {
       this.rotateX = 0;
       this.rotateY = 0;
@@ -123,6 +117,8 @@ export default {
 
 <style lang="less" scoped>
 .box-wrap {
+  width: 100%;
+  height: 100%;
   perspective: 1000px;
   transform: perspective(1000px);
   display: inline-block;

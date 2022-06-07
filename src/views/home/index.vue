@@ -37,33 +37,91 @@
         </div>
       </div>
       <div class="img-animate">
+        <!-- video图片元素点击域 -->
         <hover-animate-box>
           <template #default="{ getItemStyle }">
-            <img class="big-bg" src="@/assets/images/line-circle.png" alt="" />
-            <img class="big-group" src="@/assets/images/big-group.png" alt="" />
-            <!-- <img class="video" src="@/assets/images/Group_195.png" alt="" />
-            <img class="person" src="@/assets/images/id.png" alt="" />
-            <img class="direction" src="@/assets/images/Ethereum.png" alt="" /> -->
+            <div class="img-wrap">
+              <img
+                class="big-bg"
+                src="@/assets/images/line-circle.png"
+                alt=""
+              />
+              <img
+                :style="getItemStyle(15)"
+                class="big-group"
+                src="@/assets/images/big-group.png"
+                alt=""
+              />
+              <div
+                :style="getItemStyle(30)"
+                id="code-animate"
+                class="img-item"
+              ></div>
+              <img
+                :style="getItemStyle(50)"
+                class="video"
+                src="@/assets/images/Group_195.png"
+                alt=""
+              />
+              <img
+                :style="getItemStyle(40)"
+                class="person"
+                src="@/assets/images/id.png"
+                alt=""
+              />
+              <img
+                :style="getItemStyle(50)"
+                class="direction"
+                src="@/assets/images/Ethereum.png"
+                alt=""
+              />
+            </div>
           </template>
         </hover-animate-box>
       </div>
-      <hover-animate-box>
-        <template #default="{ getItemStyle }">
-          <div
-            style="
-              width: 300px;
-              height: 300px;
-              padding: 100px;
-              background: blue;
-            "
-          >
-            <div
-              style="width: 50px; height: 50px; background: red"
-              :style="getItemStyle(10)"
-            ></div>
+      <div class="mouse-wrap">
+        <div id="mouse-animate"></div>
+      </div>
+    </section>
+    <section class="card-section">
+      <div class="section-title">Web3Go Data Solutions</div>
+      <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" />
+      <div class="card-list">
+        <div class="card">
+          <div class="card-title">Analytical Tool</div>
+          <div class="split"></div>
+          <div class="text">
+            Formatting, visualization and analysis of multichain on-chain data.
           </div>
-        </template>
-      </hover-animate-box>
+          <div class="btn">
+            <span> Explore </span>
+            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
+          </div>
+          <div class="animate" id="dashboard-animate"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Web3Go ID</div>
+          <div class="split"></div>
+          <div class="text">Create, show and share your web3 profile.</div>
+          <div class="btn">
+            <span> Explore </span>
+            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
+          </div>
+          <div class="animate" id="dashboard-animate"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Push</div>
+          <div class="split"></div>
+          <div class="text">
+            Get immediately notified with real-time on-chain acticities.
+          </div>
+          <div class="btn">
+            <span> Explore </span>
+            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
+          </div>
+          <div class="animate" id="dashboard-animate"></div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -71,6 +129,29 @@
 <script>
 import HoverAnimateBox from "@/components/HoverAnimateBox";
 import FontFlow from "@/components/FontFlow";
+import lottie from "lottie-web";
+import codeAnimate from "@/assets/animateJson/code/code.json";
+import dashboardAnimate from "@/assets/animateJson/dashboard/dashboard.json";
+import alertAnimate from "@/assets/animateJson/alert/alert.json";
+import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
+codeAnimate.assets.forEach((item) => {
+  item.u = "";
+  if (item.w && item.h) {
+    item.p = require(`@/assets/animateJson/code/images/${item.p}`);
+  }
+});
+dashboardAnimate.assets.forEach((item) => {
+  item.u = "";
+  if (item.w && item.h) {
+    item.p = require(`@/assets/animateJson/dashboard/images/${item.p}`);
+  }
+});
+alertAnimate.assets.forEach((item) => {
+  item.u = "";
+  if (item.w && item.h) {
+    item.p = require(`@/assets/animateJson/alert/images/${item.p}`);
+  }
+});
 export default {
   components: {
     FontFlow,
@@ -81,12 +162,33 @@ export default {
       menus: ["Solutions", "News", "Docs", "Github"],
     };
   },
+  mounted() {
+    const codeAnimateInstance = lottie.loadAnimation({
+      container: document.getElementById("code-animate"), // the dom element that will contain the animation
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: codeAnimate, // the path to the animation json
+    });
+    // 降低动画帧率，不然会卡顿
+    codeAnimateInstance.setSubframe(false);
+    const mouseAnimateInstance = lottie.loadAnimation({
+      container: document.getElementById("mouse-animate"), // the dom element that will contain the animation
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: mouseAnimate, // the path to the animation json
+    });
+    mouseAnimateInstance.setSubframe(false);
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .page-wrap {
+  max-width: 100vw;
   min-height: 100vh;
+  overflow: hidden;
   background: #f3f4f6;
   .page-header {
     padding: 28px;
@@ -174,27 +276,57 @@ export default {
     .img-animate {
       top: 65px;
       right: -10px;
+      width: 750px;
+      height: 659px;
       position: absolute;
+
+      .img-wrap {
+        text-align: right;
+      }
       .big-bg {
         width: 668px;
       }
       .big-group {
-        right: 0;
-        top: 0;
+        right: -126px;
+        top: -57px;
         position: absolute;
         width: 826px;
       }
+      #code-animate {
+        right: 82px;
+        top: 333px;
+        position: absolute;
+        width: 307px;
+        height: 187px;
+      }
       .video {
+        cursor: pointer;
+        pointer-events: auto;
+        right: 359px;
+        top: 389px;
         position: absolute;
         width: 376px;
       }
       .person {
+        right: 41px;
+        top: 309px;
         position: absolute;
         width: 85px;
       }
       .direction {
+        right: 16px;
+        top: 459px;
         position: absolute;
         width: 156px;
+      }
+    }
+    .mouse-wrap {
+      margin-top: 130px;
+      text-align: center;
+      #mouse-animate {
+        display: inline-block;
+        width: 24px;
+        height: auto;
       }
     }
   }

@@ -20,6 +20,7 @@
         "ethereum-blockies-base64": "^1.0.2",
         "ethers": "^5.5.3",
         "lodash.throttle": "^4.1.1",
+        "lottie-web": "^5.9.4",
         "moment": "^2.29.3",
         "sass-loader": "^8.0.0",
         "siwe": "^1.0.0",
