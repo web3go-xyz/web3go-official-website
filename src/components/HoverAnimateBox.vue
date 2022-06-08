@@ -16,7 +16,7 @@
           'deg) rotateZ(0deg) skew(0deg, 0deg)',
       }"
     >
-      <slot :getItemStyle="getItemStyle"></slot>
+      <slot :getItemStyle="getItemStyle" :isInBox="isInBox"></slot>
     </div>
   </div>
 </template>

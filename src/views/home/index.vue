@@ -117,20 +117,33 @@
         </div>
         <div class="card card2">
           <hover-animate-box :rotate="15">
-            <div class="card-inner">
-              <div class="card-title">Web3Go ID</div>
-              <div class="split"></div>
-              <div class="text">Create, show and share your web3 profile.</div>
-              <div class="btn">
-                <span> Explore </span>
-                <img
-                  class="arrow"
-                  src="@/assets/images/bule-arrow.png"
-                  alt=""
-                />
+            <template #default="{ isInBox }">
+              <div class="card-inner">
+                <div class="card-title">Web3Go ID</div>
+                <div class="split"></div>
+                <div class="text">
+                  Create, show and share your web3 profile.
+                </div>
+                <div class="btn">
+                  <span> Explore </span>
+                  <img
+                    class="arrow"
+                    src="@/assets/images/bule-arrow.png"
+                    alt=""
+                  />
+                </div>
+                <div class="animate">
+                  <img
+                    :src="
+                      isInBox
+                        ? require('@/assets/images/id.webp')
+                        : require('@/assets/images/idStatic.png')
+                    "
+                    alt=""
+                  />
+                </div>
               </div>
-              <!-- <div class="animate" id="alert-animate"></div> -->
-            </div>
+            </template>
           </hover-animate-box>
         </div>
         <div class="card card3">
@@ -157,6 +170,25 @@
             </div>
           </hover-animate-box>
         </div>
+      </div>
+    </section>
+    <section class="number-section layout">
+      <div class="section-title">
+        <div class="circle"></div>
+        <span> 1000+ Users' intelligent data assistant </span>
+      </div>
+      <img class="bg" src="@/assets/images/number-section.png" alt="" />
+      <div class="item item1">
+        <div class="num">68</div>
+        <div class="label">Predictions</div>
+      </div>
+      <div class="item item2">
+        <div class="num">100,127</div>
+        <div class="label">Alerts</div>
+      </div>
+      <div class="item item3">
+        <div class="num">235</div>
+        <div class="label">Dashboards</div>
       </div>
     </section>
   </div>
@@ -397,6 +429,8 @@ export default {
   }
   .section-title {
     position: absolute;
+    left: 0;
+    top: 0;
     .circle {
       z-index: 1;
       position: absolute;
@@ -485,6 +519,9 @@ export default {
           position: absolute;
           bottom: -20px;
           right: -36px;
+          img {
+            width: 100%;
+          }
         }
       }
       .card-inner {
@@ -509,6 +546,41 @@ export default {
         backdrop-filter: blur(10px);
         border-radius: 20px;
       }
+    }
+  }
+  .number-section {
+    position: relative;
+    padding-left: 87px;
+    padding-top: 40px;
+    padding-bottom: 150px;
+    .bg {
+      width: 950px;
+    }
+    .item {
+      position: absolute;
+      .num {
+        font-weight: 500;
+        font-size: 64px;
+        color: #343a3f;
+      }
+      .label {
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 16px;
+        color: #4d5358;
+      }
+    }
+    .item1 {
+      left: 260px;
+      top: 374px;
+    }
+    .item2 {
+      left: 718px;
+      top: 281px;
+    }
+    .item3 {
+      left: 1046px;
+      top: 26px;
     }
   }
 }
