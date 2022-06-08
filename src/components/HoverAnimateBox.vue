@@ -24,6 +24,12 @@
 <script>
 import throttle from "lodash.throttle";
 export default {
+  props: {
+    rotate: {
+      type: Number,
+      default: 5,
+    },
+  },
   data() {
     return {
       rotateX: 0,
@@ -84,17 +90,17 @@ export default {
       const halfHeight = this.boxHeight / 2;
 
       if (offsetX < halfWidth) {
-        this.rotateY = (-5 * (halfWidth - offsetX)) / halfWidth;
+        this.rotateY = (-this.rotate * (halfWidth - offsetX)) / halfWidth;
         this.itemTranslateXPercent = -(halfWidth - offsetX) / halfWidth;
       } else if (offsetX > halfWidth) {
-        this.rotateY = (5 * (offsetX - halfWidth)) / halfWidth;
+        this.rotateY = (this.rotate * (offsetX - halfWidth)) / halfWidth;
         this.itemTranslateXPercent = (offsetX - halfWidth) / halfWidth;
       }
       if (offsetY < halfHeight) {
-        this.rotateX = (5 * (halfHeight - offsetY)) / halfHeight;
+        this.rotateX = (this.rotate * (halfHeight - offsetY)) / halfHeight;
         this.itemTranslateYPercent = -(halfHeight - offsetY) / halfHeight;
       } else if (offsetY > halfHeight) {
-        this.rotateX = (-5 * (offsetY - halfHeight)) / halfHeight;
+        this.rotateX = (-this.rotate * (offsetY - halfHeight)) / halfHeight;
         this.itemTranslateYPercent = (offsetY - halfHeight) / halfHeight;
       }
     }, 50),
@@ -105,9 +111,11 @@ export default {
       this.itemTranslateYPercent = 0;
     },
     handleMouseenter() {
+      this.$emit("mouseenter");
       this.isInBox = true;
     },
     handleMouseleave() {
+      this.$emit("mouseleave");
       this.isInBox = false;
       this.clear();
     },
@@ -123,6 +131,8 @@ export default {
   transform: perspective(1000px);
   display: inline-block;
   .box {
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
     will-change: transform;
     transition: 350ms ease-out;

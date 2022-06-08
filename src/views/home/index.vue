@@ -83,43 +83,79 @@
         <div id="mouse-animate"></div>
       </div>
     </section>
-    <section class="card-section">
-      <div class="section-title">Web3Go Data Solutions</div>
+    <section class="card-section layout">
+      <div class="section-title">
+        <div class="circle"></div>
+        <span> Web3Go Data Solutions </span>
+      </div>
       <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" />
       <div class="card-list">
-        <div class="card">
-          <div class="card-title">Analytical Tool</div>
-          <div class="split"></div>
-          <div class="text">
-            Formatting, visualization and analysis of multichain on-chain data.
-          </div>
-          <div class="btn">
-            <span> Explore </span>
-            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
-          </div>
-          <div class="animate" id="dashboard-animate"></div>
+        <div class="card card1">
+          <hover-animate-box
+            :rotate="15"
+            @mouseenter="animateStart('dashboardAnimateInstance')"
+            @mouseleave="animateStop('dashboardAnimateInstance')"
+          >
+            <div class="card-inner">
+              <div class="card-title">Analytical Tool</div>
+              <div class="split"></div>
+              <div class="text">
+                Formatting, visualization and analysis of multichain on-chain
+                data.
+              </div>
+              <div class="btn">
+                <span> Explore </span>
+                <img
+                  class="arrow"
+                  src="@/assets/images/bule-arrow.png"
+                  alt=""
+                />
+              </div>
+              <div class="animate" id="dashboard-animate"></div>
+            </div>
+          </hover-animate-box>
         </div>
-        <div class="card">
-          <div class="card-title">Web3Go ID</div>
-          <div class="split"></div>
-          <div class="text">Create, show and share your web3 profile.</div>
-          <div class="btn">
-            <span> Explore </span>
-            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
-          </div>
-          <div class="animate" id="dashboard-animate"></div>
+        <div class="card card2">
+          <hover-animate-box :rotate="15">
+            <div class="card-inner">
+              <div class="card-title">Web3Go ID</div>
+              <div class="split"></div>
+              <div class="text">Create, show and share your web3 profile.</div>
+              <div class="btn">
+                <span> Explore </span>
+                <img
+                  class="arrow"
+                  src="@/assets/images/bule-arrow.png"
+                  alt=""
+                />
+              </div>
+              <!-- <div class="animate" id="alert-animate"></div> -->
+            </div>
+          </hover-animate-box>
         </div>
-        <div class="card">
-          <div class="card-title">Push</div>
-          <div class="split"></div>
-          <div class="text">
-            Get immediately notified with real-time on-chain acticities.
-          </div>
-          <div class="btn">
-            <span> Explore </span>
-            <img class="arrow" src="@/assets/images/bule-arrow.png" alt="" />
-          </div>
-          <div class="animate" id="dashboard-animate"></div>
+        <div class="card card3">
+          <hover-animate-box
+            @mouseenter="animateStart('alertAnimateInstance')"
+            @mouseleave="animateStop('alertAnimateInstance')"
+            :rotate="15"
+          >
+            <div class="card-inner">
+              <div class="card-title">Push</div>
+              <div class="split"></div>
+              <div class="text">
+                Get immediately notified with real-time on-chain acticities.
+              </div>
+              <div class="btn">
+                <span> Explore </span>
+                <img
+                  class="arrow"
+                  src="@/assets/images/bule-arrow.png"
+                  alt=""
+                />
+              </div>
+              <div class="animate" id="alert-animate"></div>
+            </div>
+          </hover-animate-box>
         </div>
       </div>
     </section>
@@ -163,23 +199,52 @@ export default {
     };
   },
   mounted() {
-    const codeAnimateInstance = lottie.loadAnimation({
-      container: document.getElementById("code-animate"), // the dom element that will contain the animation
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: codeAnimate, // the path to the animation json
-    });
-    // 降低动画帧率，不然会卡顿
-    codeAnimateInstance.setSubframe(false);
-    const mouseAnimateInstance = lottie.loadAnimation({
-      container: document.getElementById("mouse-animate"), // the dom element that will contain the animation
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: mouseAnimate, // the path to the animation json
-    });
-    mouseAnimateInstance.setSubframe(false);
+    this.initAnimate();
+  },
+  methods: {
+    animateStart(instance) {
+      this[instance].goToAndPlay(0);
+    },
+    animateStop(instance) {
+      this[instance].goToAndStop(4000);
+    },
+    initAnimate() {
+      this.codeAnimateInstance = lottie.loadAnimation({
+        container: document.getElementById("code-animate"), // the dom element that will contain the animation
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        animationData: codeAnimate, // the path to the animation json
+      });
+      // 降低动画帧率，不然会卡顿
+      this.codeAnimateInstance.setSubframe(false);
+      this.mouseAnimateInstance = lottie.loadAnimation({
+        container: document.getElementById("mouse-animate"), // the dom element that will contain the animation
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        animationData: mouseAnimate, // the path to the animation json
+      });
+      this.mouseAnimateInstance.setSubframe(false);
+      this.dashboardAnimateInstance = lottie.loadAnimation({
+        container: document.getElementById("dashboard-animate"), // the dom element that will contain the animation
+        renderer: "svg",
+        loop: true,
+        autoplay: false,
+        animationData: dashboardAnimate, // the path to the animation json
+      });
+      this.dashboardAnimateInstance.setSubframe(false);
+      this.dashboardAnimateInstance.goToAndStop(4000);
+      this.alertAnimateInstance = lottie.loadAnimation({
+        container: document.getElementById("alert-animate"), // the dom element that will contain the animation
+        renderer: "svg",
+        loop: true,
+        autoplay: false,
+        animationData: alertAnimate, // the path to the animation json
+      });
+      this.alertAnimateInstance.setSubframe(false);
+      this.alertAnimateInstance.goToAndStop(4000);
+    },
   },
 };
 </script>
@@ -321,12 +386,128 @@ export default {
       }
     }
     .mouse-wrap {
-      margin-top: 130px;
+      margin: 130px 0;
       text-align: center;
       #mouse-animate {
         display: inline-block;
         width: 24px;
         height: auto;
+      }
+    }
+  }
+  .section-title {
+    position: absolute;
+    .circle {
+      z-index: 1;
+      position: absolute;
+      display: inline-block;
+      width: 89.9px;
+      height: 89.9px;
+      border-radius: 50%;
+      background: linear-gradient(
+        171.96deg,
+        #ccc9ed 5.35%,
+        rgba(238, 240, 254, 0) 91.1%
+      );
+      transform: rotate(-15deg);
+    }
+    span {
+      letter-spacing: -0.02em;
+      position: absolute;
+      z-index: 2;
+      font-weight: 500;
+      font-size: 42px;
+      color: #121619;
+      width: 470px;
+      top: 26px;
+      left: 29px;
+    }
+  }
+  .card-section {
+    margin-bottom: 161px;
+    position: relative;
+    .circle-bg {
+      position: absolute;
+      left: 436px;
+      width: 495px;
+    }
+    .card-list {
+      padding-top: 150px;
+      padding-left: 30px;
+      padding-right: 30px;
+      display: flex;
+      justify-content: space-between;
+
+      .card {
+        width: 377px;
+        height: 322px;
+
+        box-sizing: border-box;
+        .card-title {
+          font-weight: 500;
+          font-size: 20px;
+          color: #000000;
+        }
+        .split {
+          margin-top: 32px;
+          width: 16px;
+          height: 3px;
+          background: #4318ff;
+        }
+        .text {
+          margin-top: 16px;
+          width: 200px;
+          height: 60px;
+          font-weight: 400;
+          font-size: 16px;
+          color: #4d5358;
+        }
+        .btn {
+          cursor: pointer;
+          margin-top: 53px;
+          display: flex;
+          align-items: center;
+          &:hover {
+            opacity: 0.8;
+          }
+          span {
+            font-weight: 700;
+            font-size: 14px;
+            color: #4318ff;
+          }
+          .arrow {
+            margin-left: 10px;
+            width: 6px;
+          }
+        }
+        .animate {
+          width: 255px;
+          position: absolute;
+          bottom: -20px;
+          right: -36px;
+        }
+      }
+      .card-inner {
+        box-sizing: border-box;
+        padding: 32px;
+        width: 100%;
+        height: 100%;
+      }
+      .card1 .card-inner {
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+      }
+      .card2 .card-inner {
+        background: rgba(195, 207, 243, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+      }
+      .card3 .card-inner {
+        background: rgba(195, 207, 243, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
       }
     }
   }
