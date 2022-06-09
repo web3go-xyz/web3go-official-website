@@ -92,7 +92,7 @@
       <div class="card-list">
         <div class="card card1">
           <hover-animate-box
-            :rotate="15"
+            :rotate="20"
             @mouseenter="animateStart('dashboardAnimateInstance')"
             @mouseleave="animateStop('dashboardAnimateInstance')"
           >
@@ -116,7 +116,7 @@
           </hover-animate-box>
         </div>
         <div class="card card2">
-          <hover-animate-box :rotate="15">
+          <hover-animate-box :rotate="20">
             <template #default="{ isInBox }">
               <div class="card-inner">
                 <div class="card-title">Web3Go ID</div>
@@ -150,7 +150,7 @@
           <hover-animate-box
             @mouseenter="animateStart('alertAnimateInstance')"
             @mouseleave="animateStop('alertAnimateInstance')"
-            :rotate="15"
+            :rotate="20"
           >
             <div class="card-inner">
               <div class="card-title">Push</div>
@@ -191,6 +191,126 @@
         <div class="label">Dashboards</div>
       </div>
     </section>
+    <section class="network-section">
+      <img class="bg" src="@/assets/images/Group_190.png" alt="" />
+      <span
+        >We supported various networks and powered leading Web3 projects
+      </span>
+    </section>
+    <section class="investor-section layout">
+      <div class="section-title">
+        <div class="circle"></div>
+        <span> Investors </span>
+      </div>
+      <img src="@/assets/images/investor.png" alt="" />
+    </section>
+    <section class="users-section layout">
+      <div class="section-title">
+        <div class="circle"></div>
+        <span> See who's using Web3Go </span>
+      </div>
+      <div class="subtitle">
+        Prediticive modeling with one click to simulate your rewards and support
+        your investing strategy
+      </div>
+      <div class="section-main">
+        <div class="img-wrap">
+          <img class="dot" src="@/assets/images/bluedot.png" alt="" />
+          <el-carousel
+            @change="changeSlider"
+            arrow="never"
+            :interval="7000"
+            trigger="click"
+            height="546px"
+            class="carousel"
+            ref="carousel"
+          >
+            <el-carousel-item v-for="(item, i) in slideList" :key="i">
+              <div class="item">
+                <img class="img" :src="item.image" />
+              </div>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+        <div class="m-right">
+          <div class="icon-wrap">
+            <img src="@/assets/images/doticon.png" alt="" />
+          </div>
+          <div class="words">
+            {{ currentSlider.text }}
+          </div>
+          <div class="m-bottom">
+            <div class="mb-left">
+              <div class="bold">{{ currentSlider.name }}</div>
+              <div class="text">{{ currentSlider.info }}</div>
+            </div>
+            <div class="btn-wrap">
+              <el-button
+                :disabled="sliderIndex == 0"
+                @click="pre"
+                class="btn-left"
+                type="primary"
+              >
+                <img src="@/assets/images/arrowRight.png" alt="" />
+              </el-button>
+              <el-button
+                :disabled="sliderIndex == slideList.length - 1"
+                @click="next"
+                class="btn-right"
+                type="primary"
+              >
+                <img src="@/assets/images/arrowRight.png" alt="" />
+              </el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="news-section layout">
+      <div class="section-title">
+        <div class="circle"></div>
+        <span> Trending News </span>
+      </div>
+      <div class="more-wrap">
+        <div class="more">
+          <span>More</span>
+          <img src="@/assets/images/right-arrow2.png" alt="" />
+        </div>
+      </div>
+      <div class="news-list">
+        <div class="item" v-for="(v, i) in newsList" :key="i">
+          <hover-animate-box :rotate="20">
+            <div class="item-inner">
+              <div class="img-wrap">
+                <img :src="v.image" alt="" />
+              </div>
+              <div class="text">{{ v.text }}</div>
+              <div class="btn-wrap">
+                <div class="btn">Read article</div>
+              </div>
+            </div>
+          </hover-animate-box>
+        </div>
+      </div>
+    </section>
+    <div class="page-footer">
+      <div class="layout">
+        <div class="search-wrap">
+          <div class="search">
+            <el-input
+              v-model="searchValue"
+              placeholder="Enter your email to get latest Web3go News!"
+            />
+          </div>
+          <div class="btn">
+            <el-button type="primary">
+              <span>Subscribe</span>
+              <img src="@/assets/images/arrow3.png" alt="" />
+            </el-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -227,13 +347,67 @@ export default {
   },
   data() {
     return {
+      searchValue: "",
+      newsList: [
+        {
+          image: require("@/assets/images/image_30.png"),
+          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+        },
+        {
+          image: require("@/assets/images/image_30.png"),
+          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+        },
+        {
+          image: require("@/assets/images/image_30.png"),
+          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+        },
+        {
+          image: require("@/assets/images/image_30.png"),
+          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+        },
+      ],
+      sliderIndex: 0,
       menus: ["Solutions", "News", "Docs", "Github"],
+      slideList: [
+        {
+          image: require("@/assets/images/demoPerson.png"),
+          text: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+          name: "Flores, Juanita",
+          info: "Manager, Smart Spaces at Telus",
+        },
+        {
+          image: require("@/assets/images/idStatic.png"),
+          text: "22Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+          name: "Flores, Juanita2",
+          info: "Manager, Smart Spaces at Telus2",
+        },
+        {
+          image: require("@/assets/images/line-circle.png"),
+          text: "33Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+          name: "Flores, Juanita3",
+          info: "Manager, Smart Spaces at Telus3",
+        },
+      ],
     };
   },
   mounted() {
     this.initAnimate();
   },
+  computed: {
+    currentSlider() {
+      return this.slideList[this.sliderIndex];
+    },
+  },
   methods: {
+    pre() {
+      this.$refs.carousel.prev();
+    },
+    next() {
+      this.$refs.carousel.next();
+    },
+    changeSlider(index) {
+      this.sliderIndex = index;
+    },
     animateStart(instance) {
       this[instance].goToAndPlay(0);
     },
@@ -497,13 +671,10 @@ export default {
           color: #4d5358;
         }
         .btn {
-          cursor: pointer;
           margin-top: 53px;
           display: flex;
           align-items: center;
-          &:hover {
-            opacity: 0.8;
-          }
+
           span {
             font-weight: 700;
             font-size: 14px;
@@ -525,6 +696,7 @@ export default {
         }
       }
       .card-inner {
+        cursor: pointer;
         box-sizing: border-box;
         padding: 32px;
         width: 100%;
@@ -581,6 +753,231 @@ export default {
     .item3 {
       left: 1046px;
       top: 26px;
+    }
+  }
+  .network-section {
+    position: relative;
+    .bg {
+      width: 100%;
+    }
+    span {
+      display: block;
+      width: 700px;
+      font-weight: 500;
+      font-size: 42px;
+      color: #121619;
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+    }
+  }
+  .investor-section {
+    padding-left: 280px;
+    padding-top: 20px;
+    margin-top: 200px;
+    position: relative;
+    img {
+      width: 950px;
+    }
+  }
+  .users-section {
+    margin-top: 190px;
+    padding-top: 92px;
+    padding-left: 30px;
+    position: relative;
+    .subtitle {
+      font-weight: 400;
+      font-size: 16px;
+      color: #4d5358;
+      width: 475px;
+    }
+    .section-main {
+      margin-top: 72px;
+      display: flex;
+      .img-wrap {
+        width: 424px;
+        padding-top: 10px;
+        border-radius: 20px;
+        position: relative;
+        .dot {
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          transform: translateY(-50%);
+          right: -40px;
+          width: 70px;
+        }
+        .carousel {
+          .item {
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+          ::v-deep(.el-carousel__indicators) {
+            bottom: 10px;
+            .el-carousel__button {
+              border-radius: 24px;
+              width: 24px;
+              height: 4px;
+            }
+          }
+        }
+      }
+      .m-right {
+        margin-left: 150px;
+        .icon-wrap {
+          padding-left: 10px;
+          img {
+            width: 42px;
+          }
+        }
+        .words {
+          margin-top: 20px;
+          width: 650px;
+          font-weight: 400;
+          font-size: 34px;
+          color: #21272a;
+          line-height: 56px;
+        }
+        .m-bottom {
+          margin-top: 150px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          .mb-left {
+            .bold {
+              font-weight: 500;
+              font-size: 34px;
+              color: #121619;
+            }
+            .text {
+              margin-top: 4px;
+              font-weight: 400;
+              font-size: 16px;
+              color: #878d96;
+            }
+          }
+          .btn-wrap {
+            .btn-left {
+              transform: rotateY(180deg);
+              width: 56px;
+              height: 56px;
+              box-sizing: border-box;
+              border-radius: 0 30px 30px 0 !important;
+              img {
+                width: 10px;
+              }
+            }
+            .btn-right {
+              margin-left: 0;
+              width: 56px;
+              height: 56px;
+              box-sizing: border-box;
+              border-radius: 0 30px 30px 0 !important;
+              img {
+                width: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .news-section {
+    position: relative;
+    margin-top: 140px;
+    .more-wrap {
+      padding-top: 40px;
+      padding-bottom: 70px;
+      text-align: right;
+      .more {
+        display: inline-block;
+        padding: 5px;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+        span {
+          font-weight: 400;
+          font-size: 16px;
+          color: #4318ff;
+          vertical-align: middle;
+        }
+        img {
+          margin-left: 18px;
+          width: 7px;
+          vertical-align: middle;
+        }
+      }
+    }
+    .news-list {
+      display: flex;
+      justify-content: space-between;
+      .item {
+        width: 303px;
+        height: 297px;
+        box-sizing: border-box;
+        .item-inner {
+          cursor: pointer;
+          height: 100%;
+          background: #ffffff;
+          border-radius: 20px;
+          box-shadow: 0px 40px 58px -20px rgba(112, 144, 176, 0.2);
+        }
+        .img-wrap {
+          img {
+            width: 303px;
+            height: 171px;
+          }
+        }
+        .text {
+          padding: 12px 24px;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 28px;
+          color: #000000;
+        }
+        .btn-wrap {
+          padding: 0 24px;
+          .btn {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 14px;
+            color: #4318ff;
+          }
+        }
+      }
+    }
+  }
+  .page-footer {
+    margin-top: 148px;
+    height: 425px;
+    box-sizing: border-box;
+    position: relative;
+    background: #e0e5f2;
+    .search-wrap {
+      position: absolute;
+      top: -40px;
+      .search {
+        ::v-deep(.el-input) {
+          .el-input__inner {
+            border-radius: 20px;
+            padding: 0 35px;
+            height: 80px;
+            width: 950px;
+            font-weight: 500;
+            font-size: 24px;
+            box-sizing: border-box;
+            border: 0;
+            box-shadow: none;
+            outline: 0;
+          }
+        }
+      }
+      .btn {
+      }
     }
   }
 }
