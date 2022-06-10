@@ -8,7 +8,6 @@
           <div class="menu-item" v-for="(v, i) in menus" :key="i">
             <font-flow :text="v"></font-flow>
           </div>
-
           <el-button class="btn" type="primary">Start Today</el-button>
         </div>
       </div>
@@ -38,10 +37,11 @@
       </div>
       <div class="img-animate">
         <!-- video图片元素点击域 -->
-        <hover-animate-box>
+        <hover-animate-box :rotate="0">
           <template #default="{ getItemStyle }">
             <div class="img-wrap">
               <img
+                ref="bigBg"
                 class="big-bg"
                 src="@/assets/images/line-circle.png"
                 alt=""
@@ -91,7 +91,7 @@
         <div class="circle"></div>
         <span> Web3Go Data Solutions </span>
       </div>
-      <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" />
+      <!-- <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" /> -->
       <div class="card-list">
         <div class="card card1">
           <hover-animate-box
@@ -136,12 +136,10 @@
                   />
                 </div>
                 <div class="animate">
+                  <img v-show="isInBox" src="@/assets/images/id.webp" alt="" />
                   <img
-                    :src="
-                      isInBox
-                        ? require('@/assets/images/id.webp')
-                        : require('@/assets/images/idStatic.png')
-                    "
+                    v-show="!isInBox"
+                    src="@/assets/images/idStatic.png"
                     alt=""
                   />
                 </div>
@@ -512,21 +510,29 @@ export default {
       window.addEventListener("scroll", this.windowScrollFunction);
     },
     windowScrollFunction: throttle(function () {
+      // 鼠标滑动提示
       if (document.documentElement.scrollTop > 200) {
         this.showScrollTip = false;
       } else {
         this.showScrollTip = true;
       }
-      if (this.$refs.numberGrow1) {
-        this.$refs.numberGrow1.handleWindowScroll();
+      // 数字滚动
+      this.$refs.numberGrow1.handleWindowScroll();
+      this.$refs.numberGrow2.handleWindowScroll();
+      this.$refs.numberGrow3.handleWindowScroll();
+      // 毛球背景掉落效果
+      const bgEl = this.$refs.bigBg;
+      const scrollTop = document.documentElement.scrollTop;
+      if (scrollTop < 800) {
+        bgEl.style.transform = `translateY(${scrollTop}px) translateX(${
+          -scrollTop * 0.34
+        }px) scale(${1 - 0.000325 * scrollTop})`;
+      } else {
+        bgEl.style.transform = `translateY(${800}px) translateX(${
+          -800 * 0.34
+        }px) scale(${1 - 0.000325 * 800})`;
       }
-      if (this.$refs.numberGrow2) {
-        this.$refs.numberGrow2.handleWindowScroll();
-      }
-      if (this.$refs.numberGrow3) {
-        this.$refs.numberGrow3.handleWindowScroll();
-      }
-    }, 100),
+    }, 50),
     jumpUrl(url) {
       window.open(url);
     },
@@ -685,6 +691,7 @@ export default {
       }
       .big-bg {
         width: 668px;
+        transition: all 0.2s;
       }
       .big-group {
         right: -126px;
@@ -831,23 +838,32 @@ export default {
         padding: 32px;
         width: 100%;
         height: 100%;
-      }
-      .card1 .card-inner {
-        background: rgba(255, 255, 255, 0.5);
-        box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-      }
-      .card2 .card-inner {
         background: rgba(195, 207, 243, 0.2);
         backdrop-filter: blur(10px);
         border-radius: 20px;
+        transition: all 0.2s;
+        &:hover {
+          background: rgba(255, 255, 255, 0.5);
+          box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
+          backdrop-filter: blur(10px);
+        }
       }
-      .card3 .card-inner {
-        background: rgba(195, 207, 243, 0.2);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-      }
+      // .card1 .card-inner {
+      //   background: rgba(255, 255, 255, 0.5);
+      //   box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
+      //   backdrop-filter: blur(10px);
+      //   border-radius: 20px;
+      // }
+      // .card2 .card-inner {
+      //   background: rgba(195, 207, 243, 0.2);
+      //   backdrop-filter: blur(10px);
+      //   border-radius: 20px;
+      // }
+      // .card3 .card-inner {
+      //   background: rgba(195, 207, 243, 0.2);
+      //   backdrop-filter: blur(10px);
+      //   border-radius: 20px;
+      // }
     }
   }
   .number-section {
