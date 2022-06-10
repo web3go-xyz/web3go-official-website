@@ -301,12 +301,103 @@
               v-model="searchValue"
               placeholder="Enter your email to get latest Web3go News!"
             />
+            <svg class="rect" width="50" height="80">
+              <polygon
+                class="triangle"
+                stroke-linejoin="round"
+                points="10,10 40,10 10,70"
+              />
+            </svg>
           </div>
           <div class="btn">
-            <el-button type="primary">
-              <span>Subscribe</span>
+            <svg class="rect" width="340" height="80">
+              <polygon
+                class="triangle"
+                stroke-linejoin="round"
+                points="40,10 330,10 330,70 10,70"
+              />
+            </svg>
+            <div class="shadow"></div>
+            <div class="inner">
+              <span class="text">Subscribe</span>
               <img src="@/assets/images/arrow3.png" alt="" />
-            </el-button>
+            </div>
+          </div>
+        </div>
+        <div class="website-info">
+          <div class="i-left">
+            <div class="logo">
+              <img src="@/assets/images/logo(3).png" alt="" />
+            </div>
+            <div class="icons">
+              <img
+                title="Github"
+                @click="jumpUrl('https://github.com/web3go-xyz')"
+                src="@/assets/images/Vector(10).png"
+                alt=""
+              />
+              <img
+                title="Discord"
+                @click="jumpUrl('https://discord.gg/NTrHSqyuRg')"
+                src="@/assets/images/Vector(11).png"
+                alt=""
+              />
+              <img
+                title="Twitter"
+                @click="jumpUrl('https://twitter.com/Web3Go')"
+                src="@/assets/images/Vector(12).png"
+                alt=""
+              />
+              <img
+                title="Telegram"
+                @click="jumpUrl('https://t.me/web3go')"
+                src="@/assets/images/Vector(13).png"
+                alt=""
+              />
+            </div>
+            <div class="foundation">
+              <img src="@/assets/images/Frame23.png" alt="" />
+            </div>
+            <div class="gray">©2020-2022 Litentry Technologies GmbH</div>
+          </div>
+          <div class="i-right">
+            <div class="col-item">
+              <div class="title">About</div>
+              <div class="link">Roadmap</div>
+              <div class="link">Newsletter</div>
+            </div>
+            <div class="col-item">
+              <div class="title">Connect</div>
+              <div class="link" @click="jumpUrl('https://twitter.com/Web3Go')">
+                Twitter
+              </div>
+              <div
+                class="link"
+                @click="jumpUrl('https://discord.gg/NTrHSqyuRg')"
+              >
+                Discord
+              </div>
+              <div class="link" @click="jumpUrl('https://t.me/web3go')">
+                Telegram
+              </div>
+            </div>
+            <div class="col-item">
+              <div class="title">Learn</div>
+              <div class="link">Docs</div>
+              <div
+                class="link"
+                @click="jumpUrl('https://github.com/web3go-xyz')"
+              >
+                Github
+              </div>
+              <div class="link">Medium</div>
+              <div class="link">Youtube</div>
+            </div>
+            <div class="col-item">
+              <div class="title">Support</div>
+              <div class="link">Privacy Policy</div>
+              <div class="link">Terms and Conditions</div>
+            </div>
           </div>
         </div>
       </div>
@@ -399,6 +490,9 @@ export default {
     },
   },
   methods: {
+    jumpUrl(url) {
+      window.open(url);
+    },
     pre() {
       this.$refs.carousel.prev();
     },
@@ -496,7 +590,6 @@ export default {
           height: 44px;
           padding: 0 36px;
           margin-left: 20px;
-          box-shadow: 0px 15px 21px -2px rgb(202 198 248);
         }
       }
     }
@@ -534,7 +627,6 @@ export default {
           left: -220px;
         }
         .btn {
-          box-shadow: 0px 15px 21px -2px rgb(202 198 248);
           height: 44px;
           width: 141px;
           .arrow {
@@ -860,7 +952,10 @@ export default {
             }
           }
           .btn-wrap {
+            box-shadow: 0px 15px 21px -2px rgb(202 198 248);
+            border-radius: 30px;
             .btn-left {
+              box-shadow: none !important;
               transform: rotateY(180deg);
               width: 56px;
               height: 56px;
@@ -871,6 +966,7 @@ export default {
               }
             }
             .btn-right {
+              box-shadow: none !important;
               margin-left: 0;
               width: 56px;
               height: 56px;
@@ -952,6 +1048,7 @@ export default {
     }
   }
   .page-footer {
+    padding-top: 136px;
     margin-top: 148px;
     height: 425px;
     box-sizing: border-box;
@@ -960,13 +1057,18 @@ export default {
     .search-wrap {
       position: absolute;
       top: -40px;
+      display: flex;
       .search {
+        position: relative;
+        box-shadow: 0px 40px 58px rgba(112, 144, 176, 0.2);
+        border-radius: 20px;
+
         ::v-deep(.el-input) {
           .el-input__inner {
             border-radius: 20px;
             padding: 0 35px;
             height: 80px;
-            width: 950px;
+            width: 917px;
             font-weight: 500;
             font-size: 24px;
             box-sizing: border-box;
@@ -975,8 +1077,129 @@ export default {
             outline: 0;
           }
         }
+        .rect {
+          position: absolute;
+          pointer-events: none;
+          right: -28px;
+          .triangle {
+            fill: white;
+            stroke: white;
+            stroke-width: 20;
+          }
+        }
       }
       .btn {
+        position: relative;
+        margin-left: 20px;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+          .triangle {
+            fill: #7551ff !important;
+            stroke: #7551ff !important;
+          }
+        }
+        .rect {
+          display: block;
+          pointer-events: none;
+          left: -28px;
+          .triangle {
+            fill: #4318ff;
+            stroke: #4318ff;
+            stroke-width: 20;
+          }
+        }
+        .shadow {
+          position: absolute;
+          bottom: 0;
+          height: 1px;
+          left: 11px;
+          right: 25px;
+          box-shadow: 7px 16px 31px 10px rgb(202 198 248);
+        }
+
+        .inner {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          align-items: center;
+          .text {
+            font-weight: 500;
+            font-size: 24px;
+            color: #ffffff;
+          }
+          img {
+            width: 13px;
+            margin-left: 18px;
+          }
+        }
+      }
+    }
+    .website-info {
+      display: flex;
+      .i-left {
+        .logo {
+          img {
+            width: 151px;
+          }
+        }
+        .icons {
+          padding-left: 31px;
+          padding-top: 15px;
+          display: flex;
+          align-items: center;
+          img {
+            cursor: pointer;
+            margin-left: 17px;
+            height: 14px;
+            &:hover {
+              opacity: 0.8;
+            }
+            &:nth-child(1) {
+              height: 15px;
+            }
+            &:nth-child(2) {
+              height: 17px;
+            }
+          }
+        }
+        .foundation {
+          margin-top: 50px;
+          img {
+            width: 140px;
+          }
+        }
+        .gray {
+          margin-top: 42px;
+          font-weight: 400;
+          font-size: 12px;
+          color: #a3aed0;
+        }
+      }
+      .i-right {
+        display: flex;
+        .col-item {
+          margin-left: 147px;
+          .title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #21272a;
+            margin-bottom: 16px;
+          }
+          .link {
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 16px;
+            color: #4d5358;
+            margin-bottom: 16px;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
       }
     }
   }
