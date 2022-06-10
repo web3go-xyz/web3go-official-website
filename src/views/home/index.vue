@@ -80,7 +80,10 @@
         </hover-animate-box>
       </div>
       <div class="mouse-wrap">
-        <div id="mouse-animate"></div>
+        <div
+          id="mouse-animate"
+          :style="{ opacity: showScrollTip ? 1 : 0 }"
+        ></div>
       </div>
     </section>
     <section class="card-section layout">
@@ -178,16 +181,22 @@
         <span> 1000+ Users' intelligent data assistant </span>
       </div>
       <img class="bg" src="@/assets/images/number-section.png" alt="" />
-      <div class="item item1">
-        <div class="num">68</div>
+      <div class="item item1" :key="1">
+        <div class="num">
+          <number-grow ref="numberGrow1" :value="65644" />
+        </div>
         <div class="label">Predictions</div>
       </div>
-      <div class="item item2">
-        <div class="num">100,127</div>
+      <div class="item item2" :key="2">
+        <div class="num">
+          <number-grow ref="numberGrow2" :value="56456" />
+        </div>
         <div class="label">Alerts</div>
       </div>
-      <div class="item item3">
-        <div class="num">235</div>
+      <div class="item item3" :key="3">
+        <div class="num">
+          <number-grow ref="numberGrow3" :value="8978" />
+        </div>
         <div class="label">Dashboards</div>
       </div>
     </section>
@@ -408,11 +417,14 @@
 <script>
 import HoverAnimateBox from "@/components/HoverAnimateBox";
 import FontFlow from "@/components/FontFlow";
+import NumberGrow from "@/components/NumberGrow";
 import lottie from "lottie-web";
 import codeAnimate from "@/assets/animateJson/code/code.json";
 import dashboardAnimate from "@/assets/animateJson/dashboard/dashboard.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
+import throttle from "lodash.throttle";
+
 codeAnimate.assets.forEach((item) => {
   item.u = "";
   if (item.w && item.h) {
@@ -435,9 +447,11 @@ export default {
   components: {
     FontFlow,
     HoverAnimateBox,
+    NumberGrow,
   },
   data() {
     return {
+      showScrollTip: true,
       searchValue: "",
       newsList: [
         {
@@ -483,6 +497,10 @@ export default {
   },
   mounted() {
     this.initAnimate();
+    this.bindEvent();
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.windowScrollFunction);
   },
   computed: {
     currentSlider() {
@@ -490,6 +508,25 @@ export default {
     },
   },
   methods: {
+    bindEvent() {
+      window.addEventListener("scroll", this.windowScrollFunction);
+    },
+    windowScrollFunction: throttle(function () {
+      if (document.documentElement.scrollTop > 200) {
+        this.showScrollTip = false;
+      } else {
+        this.showScrollTip = true;
+      }
+      if (this.$refs.numberGrow1) {
+        this.$refs.numberGrow1.handleWindowScroll();
+      }
+      if (this.$refs.numberGrow2) {
+        this.$refs.numberGrow2.handleWindowScroll();
+      }
+      if (this.$refs.numberGrow3) {
+        this.$refs.numberGrow3.handleWindowScroll();
+      }
+    }, 100),
     jumpUrl(url) {
       window.open(url);
     },
@@ -690,6 +727,7 @@ export default {
         display: inline-block;
         width: 24px;
         height: auto;
+        transition: opacity 0.5s;
       }
     }
   }
@@ -1060,7 +1098,7 @@ export default {
       display: flex;
       .search {
         position: relative;
-        box-shadow: 0px 40px 58px rgba(112, 144, 176, 0.2);
+        box-shadow: 0px 28px 30px rgb(112 144 176 / 10%);
         border-radius: 20px;
 
         ::v-deep(.el-input) {
