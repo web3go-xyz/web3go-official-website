@@ -5,8 +5,13 @@
         <img class="bg-circle" src="@/assets/images/bg-circle.png" />
         <img class="logo" src="@/assets/images/logo.png" alt="" />
         <div class="right-menu">
-          <div class="menu-item" v-for="(v, i) in menus" :key="i">
-            <font-flow :text="v"></font-flow>
+          <div
+            class="menu-item"
+            v-for="(v, i) in menus"
+            :key="i"
+            @click="jumpUrl(v.link)"
+          >
+            <font-flow :text="v.name"></font-flow>
           </div>
           <el-button class="btn" type="primary">Start Today</el-button>
         </div>
@@ -24,8 +29,8 @@
           </div>
         </div>
         <div class="small-text slide-up-default" v-moveUp="0.5">
-          Web3Go is an open data analytics platform where everyone can grasp the
-          value behind blockchain data.
+          Web3Go is an all-in-one open data analytics and service platform where
+          everyone can grasp the value behind blockchain data.
         </div>
         <div class="btn-wrap" v-moveUp="0.8">
           <img class="btn-bg" src="@/assets/images/btn-bg.png" alt="" />
@@ -104,7 +109,7 @@
               <div class="split"></div>
               <div class="text">
                 Formatting, visualization and analysis of multichain on-chain
-                data.
+                data
               </div>
               <div class="btn">
                 <span> Explore </span>
@@ -119,14 +124,16 @@
           </hover-animate-box>
         </div>
         <div class="card card2" v-moveUp="0.5">
-          <hover-animate-box :rotate="20">
+          <hover-animate-box
+            @mouseenter="animateStart('idAnimateInstance')"
+            @mouseleave="animateStop('idAnimateInstance', 0)"
+            :rotate="20"
+          >
             <template #default="{ isInBox }">
               <div class="card-inner">
                 <div class="card-title">Web3Go ID</div>
                 <div class="split"></div>
-                <div class="text">
-                  Create, show and share your web3 profile.
-                </div>
+                <div class="text">Create, show and share your web3 profile</div>
                 <div class="btn">
                   <span> Explore </span>
                   <img
@@ -135,15 +142,15 @@
                     alt=""
                   />
                 </div>
-                <div class="animate">
+                <!-- <div class="animate">
                   <img v-show="isInBox" src="@/assets/images/id.webp" alt="" />
                   <img
                     v-show="!isInBox"
                     src="@/assets/images/idStatic.png"
                     alt=""
                   />
-                </div>
-                <!-- <div class="animate" id="id-animate"></div> -->
+                </div> -->
+                <div class="animate" id="id-animate"></div>
               </div>
             </template>
           </hover-animate-box>
@@ -158,7 +165,7 @@
               <div class="card-title">Push</div>
               <div class="split"></div>
               <div class="text">
-                Get immediately notified with real-time on-chain acticities.
+                Get immediately notified with real-time on-chain acticities
               </div>
               <div class="btn">
                 <span> Explore </span>
@@ -201,9 +208,7 @@
     </section>
     <section v-moveUp="0.2" class="network-section">
       <img class="bg" src="@/assets/images/Group_190.png" alt="" />
-      <span
-        >We supported various networks and powered leading Web3 projects
-      </span>
+      <span>We support various networks and power leading Web3 projects </span>
     </section>
     <section class="investor-section layout">
       <div class="section-title">
@@ -215,7 +220,7 @@
     <section class="users-section layout">
       <div class="section-title">
         <div class="circle"></div>
-        <span> See who's using Web3Go </span>
+        <span> Who's using Web3Go </span>
       </div>
       <div class="subtitle">
         Prediticive modeling with one click to simulate your rewards and support
@@ -396,7 +401,9 @@
             </div>
             <div class="col-item">
               <div class="title">Learn</div>
-              <div class="link">Docs</div>
+              <div class="link" @click="jumpUrl('https://doc.web3go.xyz/')">
+                Docs
+              </div>
               <div
                 class="link"
                 @click="jumpUrl('https://github.com/web3go-xyz')"
@@ -425,7 +432,7 @@ import NumberGrow from "@/components/NumberGrow";
 import lottie from "lottie-web";
 import codeAnimate from "@/assets/animateJson/code/code.json";
 import dashboardAnimate from "@/assets/animateJson/dashboard/dashboard.json";
-// import idAnimate from "@/assets/animateJson/id/id.json";
+import idAnimate from "@/assets/animateJson/id/id.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
 import throttle from "lodash.throttle";
@@ -442,12 +449,12 @@ dashboardAnimate.assets.forEach((item) => {
     item.p = require(`@/assets/animateJson/dashboard/images/${item.p}`);
   }
 });
-// idAnimate.assets.forEach((item) => {
-//   item.u = "";
-//   if (item.w && item.h) {
-//     item.p = require(`@/assets/animateJson/id/images/${item.p}`);
-//   }
-// });
+idAnimate.assets.forEach((item) => {
+  item.u = "";
+  if (item.w && item.h) {
+    item.p = require(`@/assets/animateJson/id/images/${item.p}`);
+  }
+});
 alertAnimate.assets.forEach((item) => {
   item.u = "";
   if (item.w && item.h) {
@@ -462,6 +469,11 @@ export default {
   },
   data() {
     return {
+      codeAnimateInstance: null,
+      mouseAnimateInstance: null,
+      dashboardAnimateInstance: null,
+      idAnimateInstance: null,
+      alertAnimateInstance: null,
       showScrollTip: true,
       searchValue: "",
       newsList: [
@@ -483,7 +495,25 @@ export default {
         },
       ],
       sliderIndex: 0,
-      menus: ["Solutions", "News", "Docs", "Github"],
+      // @click="jumpUrl('https://doc.web3go.xyz/')
+      menus: [
+        {
+          name: "Solutions",
+          link: "",
+        },
+        {
+          name: "News",
+          link: "",
+        },
+        {
+          name: "Docs",
+          link: "https://doc.web3go.xyz/",
+        },
+        {
+          name: "Github",
+          link: "https://github.com/web3go-xyz",
+        },
+      ],
       slideList: [
         {
           image: require("@/assets/images/demoPerson.png"),
@@ -547,6 +577,9 @@ export default {
       }
     }, 50),
     jumpUrl(url) {
+      if (!url) {
+        return;
+      }
       window.open(url);
     },
     pre() {
@@ -561,8 +594,8 @@ export default {
     animateStart(instance) {
       this[instance].goToAndPlay(0);
     },
-    animateStop(instance) {
-      this[instance].goToAndStop(4000);
+    animateStop(instance, time) {
+      this[instance].goToAndStop(time !== undefined ? time : 4000);
     },
     initAnimate() {
       this.codeAnimateInstance = lottie.loadAnimation({
@@ -591,6 +624,15 @@ export default {
       });
       this.dashboardAnimateInstance.setSubframe(false);
       this.dashboardAnimateInstance.goToAndStop(4000);
+      this.idAnimateInstance = lottie.loadAnimation({
+        container: document.getElementById("id-animate"), // the dom element that will contain the animation
+        renderer: "svg",
+        loop: true,
+        autoplay: false,
+        animationData: idAnimate, // the path to the animation json
+      });
+      this.idAnimateInstance.setSubframe(false);
+      this.idAnimateInstance.goToAndStop(0);
       this.alertAnimateInstance = lottie.loadAnimation({
         container: document.getElementById("alert-animate"), // the dom element that will contain the animation
         renderer: "svg",
@@ -895,6 +937,7 @@ export default {
         color: #343a3f;
       }
       .label {
+        padding-left: 5px;
         margin-top: 4px;
         font-weight: 400;
         font-size: 16px;
