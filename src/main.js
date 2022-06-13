@@ -12,6 +12,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import moment from 'moment';
 import * as utils from '@/utils'
 import moveUp from '@/directive/moveUp';
+import moveLeft from '@/directive/moveLeft';
+
 // 获取保存的用户信息
 const savedUserDataStr = localStorage.getItem('userData');
 if (savedUserDataStr) {
@@ -26,6 +28,8 @@ app.config.globalProperties.$moment = moment;
 
 app.component('v-chart', ECharts)
 app.directive('moveUp', moveUp);
+app.directive('moveLeft', moveLeft);
+
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)

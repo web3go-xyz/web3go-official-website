@@ -60,9 +60,6 @@ ul {
     margin: 0;
 }
 
-.slide-up-default {
-    // opacity: 0;
-}
 @keyframes slideUp {
     0% {
         transform: translateY(50px);
@@ -71,6 +68,17 @@ ul {
 
     100% {
         transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slideLeft {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
         opacity: 1;
     }
 }

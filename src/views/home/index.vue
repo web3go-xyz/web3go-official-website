@@ -19,7 +19,7 @@
     </div>
     <section class="video-section layout">
       <div class="section-main">
-        <div v-moveUp="0" class="big-text slide-up-default">
+        <div v-moveUp="0" class="big-text">
           <div class="line1">Everyone can</div>
           <div class="line2">play with</div>
           <div class="line3">
@@ -28,7 +28,7 @@
             >
           </div>
         </div>
-        <div class="small-text slide-up-default" v-moveUp="0.5">
+        <div class="small-text" v-moveUp="0.5">
           Web3Go is an all-in-one open data analytics and service platform where
           everyone can grasp the value behind blockchain data.
         </div>
@@ -92,7 +92,7 @@
       </div>
     </section>
     <section class="card-section layout">
-      <div class="section-title">
+      <div class="section-title" v-moveLeft="0">
         <div class="circle"></div>
         <span> Web3Go Data Solutions </span>
       </div>
@@ -182,7 +182,7 @@
       </div>
     </section>
     <section class="number-section layout">
-      <div class="section-title">
+      <div class="section-title" v-moveLeft="0">
         <div class="circle"></div>
         <span> 1000+ Users' intelligent data assistant </span>
       </div>
@@ -212,18 +212,18 @@
       <span>We support various networks and power leading Web3 projects </span>
     </section>
     <section class="investor-section layout">
-      <div class="section-title">
+      <div class="section-title" v-moveLeft="0">
         <div class="circle"></div>
         <span> Investors </span>
       </div>
       <img v-moveUp="0.4" src="@/assets/images/investor.png" alt="" />
     </section>
     <section class="users-section layout">
-      <div class="section-title">
+      <div class="section-title" v-moveLeft="0">
         <div class="circle"></div>
         <span> Who's using Web3Go </span>
       </div>
-      <div class="subtitle">
+      <div class="subtitle" v-moveLeft="0.1">
         Prediticive modeling with one click to simulate your rewards and support
         your investing strategy
       </div>
@@ -281,7 +281,7 @@
       </div>
     </section>
     <section class="news-section layout">
-      <div class="section-title">
+      <div class="section-title" v-moveLeft="0">
         <div class="circle"></div>
         <span> Trending News </span>
       </div>
