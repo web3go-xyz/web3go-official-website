@@ -14,7 +14,7 @@
     </div>
     <section class="video-section layout">
       <div class="section-main">
-        <div class="big-text">
+        <div v-moveUp="0" class="big-text slide-up-default">
           <div class="line1">Everyone can</div>
           <div class="line2">play with</div>
           <div class="line3">
@@ -23,11 +23,11 @@
             >
           </div>
         </div>
-        <div class="small-text">
+        <div class="small-text slide-up-default" v-moveUp="0.5">
           Web3Go is an open data analytics platform where everyone can grasp the
           value behind blockchain data.
         </div>
-        <div class="btn-wrap">
+        <div class="btn-wrap" v-moveUp="0.8">
           <img class="btn-bg" src="@/assets/images/btn-bg.png" alt="" />
           <el-button class="btn" type="primary">
             <span>Start</span>
@@ -93,7 +93,7 @@
       </div>
       <!-- <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" /> -->
       <div class="card-list">
-        <div class="card card1">
+        <div class="card card1" v-moveUp="0.2">
           <hover-animate-box
             :rotate="20"
             @mouseenter="animateStart('dashboardAnimateInstance')"
@@ -118,7 +118,7 @@
             </div>
           </hover-animate-box>
         </div>
-        <div class="card card2">
+        <div class="card card2" v-moveUp="0.5">
           <hover-animate-box :rotate="20">
             <template #default="{ isInBox }">
               <div class="card-inner">
@@ -143,11 +143,12 @@
                     alt=""
                   />
                 </div>
+                <!-- <div class="animate" id="id-animate"></div> -->
               </div>
             </template>
           </hover-animate-box>
         </div>
-        <div class="card card3">
+        <div class="card card3" v-moveUp="0.8">
           <hover-animate-box
             @mouseenter="animateStart('alertAnimateInstance')"
             @mouseleave="animateStop('alertAnimateInstance')"
@@ -198,7 +199,7 @@
         <div class="label">Dashboards</div>
       </div>
     </section>
-    <section class="network-section">
+    <section v-moveUp="0.2" class="network-section">
       <img class="bg" src="@/assets/images/Group_190.png" alt="" />
       <span
         >We supported various networks and powered leading Web3 projects
@@ -209,7 +210,7 @@
         <div class="circle"></div>
         <span> Investors </span>
       </div>
-      <img src="@/assets/images/investor.png" alt="" />
+      <img v-moveUp="0.4" src="@/assets/images/investor.png" alt="" />
     </section>
     <section class="users-section layout">
       <div class="section-title">
@@ -221,7 +222,7 @@
         your investing strategy
       </div>
       <div class="section-main">
-        <div class="img-wrap">
+        <div class="img-wrap" v-moveUp="0.2">
           <img class="dot" src="@/assets/images/bluedot.png" alt="" />
           <el-carousel
             @change="changeSlider"
@@ -239,7 +240,7 @@
             </el-carousel-item>
           </el-carousel>
         </div>
-        <div class="m-right">
+        <div class="m-right" v-moveUp="0.6">
           <div class="icon-wrap">
             <img src="@/assets/images/doticon.png" alt="" />
           </div>
@@ -285,7 +286,12 @@
         </div>
       </div>
       <div class="news-list">
-        <div class="item" v-for="(v, i) in newsList" :key="i">
+        <div
+          class="item"
+          v-for="(v, i) in newsList"
+          :key="i"
+          v-moveUp="0.2 * i"
+        >
           <hover-animate-box :rotate="20">
             <div class="item-inner">
               <div class="img-wrap">
@@ -365,7 +371,7 @@
             <div class="foundation">
               <img src="@/assets/images/Frame23.png" alt="" />
             </div>
-            <div class="gray">©2020-2022 Litentry Technologies GmbH</div>
+            <div class="gray">©2021-2022 WEB3GO TECHNOLOGY PTE.LTD.</div>
           </div>
           <div class="i-right">
             <div class="col-item">
@@ -419,6 +425,7 @@ import NumberGrow from "@/components/NumberGrow";
 import lottie from "lottie-web";
 import codeAnimate from "@/assets/animateJson/code/code.json";
 import dashboardAnimate from "@/assets/animateJson/dashboard/dashboard.json";
+// import idAnimate from "@/assets/animateJson/id/id.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
 import throttle from "lodash.throttle";
@@ -435,6 +442,12 @@ dashboardAnimate.assets.forEach((item) => {
     item.p = require(`@/assets/animateJson/dashboard/images/${item.p}`);
   }
 });
+// idAnimate.assets.forEach((item) => {
+//   item.u = "";
+//   if (item.w && item.h) {
+//     item.p = require(`@/assets/animateJson/id/images/${item.p}`);
+//   }
+// });
 alertAnimate.assets.forEach((item) => {
   item.u = "";
   if (item.w && item.h) {

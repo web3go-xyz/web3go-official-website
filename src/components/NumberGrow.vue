@@ -29,7 +29,7 @@ export default {
         offset.bottom >= 0 &&
         !this.alreadyInit
       ) {
-        this.numberGrow(el); // 取消注释--查看效果
+        this.numberGrow(el);
         this.alreadyInit = true;
       }
     },
