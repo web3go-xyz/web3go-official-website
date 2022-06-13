@@ -207,7 +207,8 @@
       </div>
     </section>
     <section v-moveUp="0.2" class="network-section">
-      <img class="bg" src="@/assets/images/Group_190.png" alt="" />
+      <img class="bg" src="@/assets/images/split2.png" alt="" />
+      <img class="icons" src="@/assets/images/split1.png" alt="" />
       <span>We support various networks and power leading Web3 projects </span>
     </section>
     <section class="investor-section layout">
@@ -961,6 +962,13 @@ export default {
     position: relative;
     .bg {
       width: 100%;
+    }
+    .icons {
+      width: 54%;
+      position: absolute;
+      left: 49.6%;
+      top: 56%;
+      transform: translate(-50%, -50%);
     }
     span {
       display: block;
