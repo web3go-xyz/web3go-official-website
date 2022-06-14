@@ -13,6 +13,7 @@ import moment from 'moment';
 import * as utils from '@/utils'
 import moveUp from '@/directive/moveUp';
 import moveLeft from '@/directive/moveLeft';
+import 'animate.css';
 
 // 获取保存的用户信息
 const savedUserDataStr = localStorage.getItem('userData');

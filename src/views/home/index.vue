@@ -9,7 +9,7 @@
             class="menu-item"
             v-for="(v, i) in menus"
             :key="i"
-            @click="jumpUrl(v.link)"
+            @click="clickMenu(v)"
           >
             <font-flow :text="v.name"></font-flow>
           </div>
@@ -62,12 +62,10 @@
                 id="code-animate"
                 class="img-item"
               ></div>
-              <img
-                :style="getItemStyle(50)"
-                class="video"
-                src="@/assets/images/Group_195.png"
-                alt=""
-              />
+              <div class="video" @click="openVideo" :style="getItemStyle(50)">
+                <img class="circle" src="@/assets/images/Frame_12.png" alt="" />
+                <img class="rect" src="@/assets/images/image_26.png" alt="" />
+              </div>
               <img
                 :style="getItemStyle(40)"
                 class="person"
@@ -423,6 +421,7 @@
         </div>
       </div>
     </div>
+    <video-modal ref="videoModal"></video-modal>
   </div>
 </template>
 
@@ -437,6 +436,7 @@ import idAnimate from "@/assets/animateJson/id/id.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
 import throttle from "lodash.throttle";
+import VideoModal from "./VideoModal";
 
 codeAnimate.assets.forEach((item) => {
   item.u = "";
@@ -467,6 +467,7 @@ export default {
     FontFlow,
     HoverAnimateBox,
     NumberGrow,
+    VideoModal,
   },
   data() {
     return {
@@ -550,6 +551,26 @@ export default {
     },
   },
   methods: {
+    openVideo() {
+      this.$refs.videoModal.init();
+    },
+    clickMenu(v) {
+      if (v.name == "Solutions") {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 1000,
+            behavior: "smooth",
+          });
+        }, 100);
+      } else if (v.name == "News") {
+        setTimeout(() => {
+          window.scrollTo({
+            top: 4420,
+            behavior: "smooth",
+          });
+        }, 100);
+      }
+    },
     bindEvent() {
       window.addEventListener("scroll", this.windowScrollFunction);
     },
@@ -569,12 +590,14 @@ export default {
       const scrollTop = document.documentElement.scrollTop;
       if (scrollTop < 800) {
         bgEl.style.transform = `translateY(${scrollTop}px) translateX(${
-          -scrollTop * 0.34
-        }px) scale(${1 - 0.000325 * scrollTop})`;
+          -scrollTop * 0.89
+        }px) scale(${1 - 0.00095 * scrollTop})`;
+        bgEl.style.opacity = 1 - 0.0008 * scrollTop;
       } else {
+        bgEl.style.opacity = 0;
         bgEl.style.transform = `translateY(${800}px) translateX(${
-          -800 * 0.34
-        }px) scale(${1 - 0.000325 * 800})`;
+          -800 * 0.89
+        }px) scale(${1 - 0.00095 * 800})`;
       }
     }, 50),
     jumpUrl(url) {
@@ -747,7 +770,7 @@ export default {
       }
       .big-bg {
         width: 668px;
-        transition: all 0.2s;
+        transition: transform 0.2s;
       }
       .big-group {
         right: -126px;
@@ -768,7 +791,27 @@ export default {
         right: 359px;
         top: 389px;
         position: absolute;
-        width: 376px;
+        &:hover {
+          .circle{
+           transform: translateY(-50%) scale(1.2);
+          }
+          .rect {
+            opacity: .5;
+          }
+        }
+        .circle {
+          z-index: 2;
+          width: 83px;
+          position: absolute;
+          top: 50%;
+          left: -30px;
+          transform: translateY(-50%);
+          transition: all .3s;
+        }
+        .rect {
+          transition: all .3s;
+          width: 346px;
+        }
       }
       .person {
         right: 41px;
