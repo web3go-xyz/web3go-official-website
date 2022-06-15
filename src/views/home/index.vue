@@ -141,15 +141,15 @@
                     alt=""
                   />
                 </div>
-                <div class="animate">
+                <!-- <div class="animate">
                   <img v-show="isInBox" src="@/assets/images/id.webp" alt="" />
                   <img
                     v-show="!isInBox"
                     src="@/assets/images/idStatic.png"
                     alt=""
                   />
-                </div>
-                <!-- <div class="animate" id="id-animate"></div> -->
+                </div> -->
+                <div class="animate" id="id-animate"></div>
               </div>
             </template>
           </hover-animate-box>
