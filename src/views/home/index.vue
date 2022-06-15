@@ -11,7 +11,8 @@
             :key="i"
             @click="clickMenu(v)"
           >
-            <font-flow :text="v.name"></font-flow>
+            {{ v.name }}
+            <!-- <font-flow :text="v.name"></font-flow> -->
           </div>
           <el-button class="btn" type="primary">Start Today</el-button>
         </div>
@@ -140,15 +141,15 @@
                     alt=""
                   />
                 </div>
-                <!-- <div class="animate">
+                <div class="animate">
                   <img v-show="isInBox" src="@/assets/images/id.webp" alt="" />
                   <img
                     v-show="!isInBox"
                     src="@/assets/images/idStatic.png"
                     alt=""
                   />
-                </div> -->
-                <div class="animate" id="id-animate"></div>
+                </div>
+                <!-- <div class="animate" id="id-animate"></div> -->
               </div>
             </template>
           </hover-animate-box>
@@ -704,8 +705,23 @@ export default {
           font-size: 20px;
           font-weight: 400;
           color: #121619;
-          /deep/ .box {
-            padding: 11px 36px;
+          padding: 11px 36px;
+          cursor: pointer;
+          position: relative;
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 10px;
+            width: 0;
+            height: 2px;
+            background: #4318ff;
+            transition: all 0.4s ;
+          }
+          &:hover {
+            &:after {
+              width: calc(100% - 72px);
+            }
           }
         }
         .btn {
@@ -792,11 +808,11 @@ export default {
         top: 389px;
         position: absolute;
         &:hover {
-          .circle{
-           transform: translateY(-50%) scale(1.2);
+          .circle {
+            transform: translateY(-50%) scale(1.2);
           }
           .rect {
-            opacity: .5;
+            opacity: 0.5;
           }
         }
         .circle {
@@ -806,10 +822,10 @@ export default {
           top: 50%;
           left: -30px;
           transform: translateY(-50%);
-          transition: all .3s;
+          transition: all 0.3s;
         }
         .rect {
-          transition: all .3s;
+          transition: all 0.3s;
           width: 346px;
         }
       }
