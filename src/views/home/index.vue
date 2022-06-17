@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrap">
-    <div class="page-header">
+    <div class="page-header" v-moveBottom>
       <div class="layout">
         <img class="bg-circle" src="@/assets/images/bg-circle.png" />
         <img class="logo" src="@/assets/images/logo.png" alt="" />

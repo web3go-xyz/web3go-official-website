@@ -12,6 +12,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import moment from 'moment';
 import * as utils from '@/utils'
 import moveUp from '@/directive/moveUp';
+import moveBottom from '@/directive/moveBottom';
 import moveLeft from '@/directive/moveLeft';
 import 'animate.css';
 
@@ -29,6 +30,7 @@ app.config.globalProperties.$moment = moment;
 
 app.component('v-chart', ECharts)
 app.directive('moveUp', moveUp);
+app.directive('moveBottom', moveBottom);
 app.directive('moveLeft', moveLeft);
 
 
