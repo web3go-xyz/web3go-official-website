@@ -5,7 +5,7 @@ const move = (el, binding) => {
         offset.top <= window.innerHeight &&
         offset.bottom >= 0
     ) {
-        el.style.animation = `slideUp 0.5s ${binding.value?binding.value:0}s`;
+        el.style.animation = `slideUp 1s ${binding.value?binding.value:0}s`;
         el.style['animation-fill-mode'] = 'forwards';
     }
 }

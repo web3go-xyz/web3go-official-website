@@ -20,14 +20,14 @@
     </div>
     <section class="video-section layout">
       <div class="section-main">
-        <div v-moveUp="0" class="big-text">
-          <div class="line1">Everyone can</div>
-          <div class="line2">play with</div>
-          <div class="line3">
+        <div class="big-text">
+          <slide-up class="line1">Everyone can</slide-up>
+          <slide-up class="line2" :delay="0.1">play with</slide-up>
+          <slide-up class="line3" :delay="0.2">
             <span class="blue">&lt;-</span>blockchain data<span class="blue"
               >&gt;</span
             >
-          </div>
+          </slide-up>
         </div>
         <div class="small-text" v-moveUp="0.5">
           Web3Go is an all-in-one open data analytics and service platform where
@@ -99,7 +99,7 @@
       <div class="card-list">
         <div class="card card1" v-moveUp="0.2">
           <hover-animate-box
-            :rotate="20"
+            :rotate="0"
             @mouseenter="animateStart('dashboardAnimateInstance')"
             @mouseleave="animateStop('dashboardAnimateInstance')"
           >
@@ -126,7 +126,7 @@
           <hover-animate-box
             @mouseenter="animateStart('idAnimateInstance')"
             @mouseleave="animateStop('idAnimateInstance', 0)"
-            :rotate="20"
+            :rotate="0"
           >
             <template #default="{ isInBox }">
               <div class="card-inner">
@@ -141,15 +141,22 @@
                     alt=""
                   />
                 </div>
-                <!-- <div class="animate">
-                  <img v-show="isInBox" src="@/assets/images/id.webp" alt="" />
+                <div class="animate">
                   <img
-                    v-show="!isInBox"
-                    src="@/assets/images/idStatic.png"
+                    class="img"
+                    v-show="isInBox"
+                    src="@/assets/images/id.webp"
                     alt=""
                   />
-                </div> -->
-                <div class="animate" id="id-animate"></div>
+                  <img
+                    class="img"
+                    v-show="!isInBox"
+                    src="@/assets/images/first.png"
+                    alt=""
+                  />
+                  <img class="btrect" src="@/assets/images/btrect.png" alt="" />
+                </div>
+                <!-- <div class="animate" id="id-animate"></div> -->
               </div>
             </template>
           </hover-animate-box>
@@ -158,7 +165,7 @@
           <hover-animate-box
             @mouseenter="animateStart('alertAnimateInstance')"
             @mouseleave="animateStop('alertAnimateInstance')"
-            :rotate="20"
+            :rotate="0"
           >
             <div class="card-inner">
               <div class="card-title">Push</div>
@@ -227,35 +234,41 @@
         your investing strategy
       </div>
       <div class="section-main">
-        <div class="img-wrap" v-moveUp="0.2">
-          <img class="dot" src="@/assets/images/bluedot.png" alt="" />
-          <el-carousel
-            @change="changeSlider"
-            arrow="never"
-            :interval="7000"
-            trigger="click"
-            height="546px"
-            class="carousel"
-            ref="carousel"
-          >
-            <el-carousel-item v-for="(item, i) in slideList" :key="i">
-              <div class="item">
-                <img class="img" :src="item.image" />
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
-        <div class="m-right" v-moveUp="0.6">
+        <hover-animate-box :rotate="5">
+          <div class="img-wrap" v-moveUp="0.2">
+            <img class="dot" src="@/assets/images/bluedot.png" alt="" />
+            <el-carousel
+              @change="changeSlider"
+              arrow="never"
+              :interval="7000"
+              trigger="click"
+              height="546px"
+              class="carousel"
+              ref="carousel"
+            >
+              <el-carousel-item v-for="(item, i) in slideList" :key="i">
+                <div class="item">
+                  <img class="img" :src="item.image" />
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+        </hover-animate-box>
+        <div class="m-right">
           <div class="icon-wrap">
             <img src="@/assets/images/doticon.png" alt="" />
           </div>
-          <div class="words">
+          <slide-up ref="slideTextRef1" class="words">
             {{ currentSlider.text }}
-          </div>
+          </slide-up>
           <div class="m-bottom">
             <div class="mb-left">
-              <div class="bold">{{ currentSlider.name }}</div>
-              <div class="text">{{ currentSlider.info }}</div>
+              <slide-up ref="slideTextRef2" class="bold" :delay="0.2">{{
+                currentSlider.name
+              }}</slide-up>
+              <slide-up ref="slideTextRef3" class="text" :delay="0.4">{{
+                currentSlider.info
+              }}</slide-up>
             </div>
             <div class="btn-wrap">
               <el-button
@@ -436,6 +449,8 @@ import dashboardAnimate from "@/assets/animateJson/dashboard/dashboard.json";
 import idAnimate from "@/assets/animateJson/id/id.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
+import SlideUp from "@/components/SlideUp";
+
 import throttle from "lodash.throttle";
 import VideoModal from "./VideoModal";
 
@@ -469,6 +484,7 @@ export default {
     HoverAnimateBox,
     NumberGrow,
     VideoModal,
+    SlideUp,
   },
   data() {
     return {
@@ -593,7 +609,7 @@ export default {
         bgEl.style.transform = `translateY(${scrollTop}px) translateX(${
           -scrollTop * 0.89
         }px) scale(${1 - 0.00095 * scrollTop})`;
-        bgEl.style.opacity = 1 - 0.0008 * scrollTop;
+        bgEl.style.opacity = 1 - 0.00125 * scrollTop;
       } else {
         bgEl.style.opacity = 0;
         bgEl.style.transform = `translateY(${800}px) translateX(${
@@ -615,6 +631,9 @@ export default {
     },
     changeSlider(index) {
       this.sliderIndex = index;
+      this.$refs.slideTextRef1.reMove();
+      this.$refs.slideTextRef2.reMove();
+      this.$refs.slideTextRef3.reMove();
     },
     animateStart(instance) {
       this[instance].goToAndPlay(0);
@@ -716,7 +735,7 @@ export default {
             width: 0;
             height: 2px;
             background: #4318ff;
-            transition: all 0.4s ;
+            transition: all 0.4s;
           }
           &:hover {
             &:after {
@@ -942,8 +961,16 @@ export default {
           position: absolute;
           bottom: -20px;
           right: -36px;
-          img {
+          .img {
+            position: relative;
+            z-index: 2;
             width: 100%;
+          }
+          .btrect {
+            width: 226px;
+            position: absolute;
+            bottom: 13px;
+            left: 13px;
           }
         }
       }
@@ -1095,7 +1122,7 @@ export default {
         }
       }
       .m-right {
-        margin-left: 150px;
+        margin-left: 130px;
         .icon-wrap {
           padding-left: 10px;
           img {
