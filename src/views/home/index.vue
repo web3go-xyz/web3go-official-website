@@ -41,7 +41,7 @@
           </el-button>
         </div>
       </div>
-      <div class="img-animate">
+      <div v-moveUp="0.5" class="img-animate">
         <!-- video图片元素点击域 -->
         <hover-animate-box :rotate="0">
           <template #default="{ getItemStyle }">
@@ -66,6 +66,7 @@
               <div class="video" @click="openVideo" :style="getItemStyle(50)">
                 <img class="circle" src="@/assets/images/Frame_12.png" alt="" />
                 <img class="rect" src="@/assets/images/image_26.png" alt="" />
+                <img class="rect2" src="@/assets/images/rect2.png" alt="" />
               </div>
               <img
                 :style="getItemStyle(40)"
@@ -104,21 +105,22 @@
             @mouseleave="animateStop('dashboardAnimateInstance')"
           >
             <div class="card-inner">
-              <div class="card-title">Analytical Tool</div>
+              <div class="card-title">Go Analytics</div>
               <div class="split"></div>
               <div class="text">
-                Formatting, visualization and analysis of multichain on-chain
-                data
+                Formatting, visualization, sharing, and analysis of multichain
+                on-chain data
               </div>
               <div class="btn">
-                <span> Explore </span>
-                <img
-                  class="arrow"
-                  src="@/assets/images/bule-arrow.png"
-                  alt=""
-                />
+                <span> View the solution </span>
+                <img class="arrow" src="@/assets/images/arrow4.png" alt="" />
               </div>
               <div class="animate" id="dashboard-animate"></div>
+              <img
+                class="big-bg"
+                src="@/assets/images/line-circle.png"
+                alt=""
+              />
             </div>
           </hover-animate-box>
         </div>
@@ -130,17 +132,21 @@
           >
             <template #default="{ isInBox }">
               <div class="card-inner">
-                <div class="card-title">Web3Go ID</div>
+                <div class="card-title">Go ID</div>
                 <div class="split"></div>
-                <div class="text">Create, show and share your web3 profile</div>
-                <div class="btn">
-                  <span> Explore </span>
-                  <img
-                    class="arrow"
-                    src="@/assets/images/bule-arrow.png"
-                    alt=""
-                  />
+                <div class="text">
+                  Identity management and Social-Fi dApp: create, show and share
+                  your Web3 profile
                 </div>
+                <div class="btn">
+                  <span> View the solution </span>
+                  <img class="arrow" src="@/assets/images/arrow4.png" alt="" />
+                </div>
+                <img
+                  class="big-bg"
+                  src="@/assets/images/line-circle.png"
+                  alt=""
+                />
                 <div class="animate">
                   <img
                     class="img"
@@ -168,19 +174,21 @@
             :rotate="0"
           >
             <div class="card-inner">
-              <div class="card-title">Push</div>
+              <div class="card-title">Go Push</div>
               <div class="split"></div>
               <div class="text">
-                Get immediately notified with real-time on-chain acticities
+                Automatic and immediate notification of real-time on-chain
+                activities
               </div>
               <div class="btn">
-                <span> Explore </span>
-                <img
-                  class="arrow"
-                  src="@/assets/images/bule-arrow.png"
-                  alt=""
-                />
+                <span> View the solution </span>
+                <img class="arrow" src="@/assets/images/arrow4.png" alt="" />
               </div>
+              <img
+                class="big-bg"
+                src="@/assets/images/line-circle.png"
+                alt=""
+              />
               <div class="animate" id="alert-animate"></div>
             </div>
           </hover-animate-box>
@@ -212,10 +220,28 @@
         <div class="label">Dashboards</div>
       </div>
     </section>
-    <section v-moveUp="0.2" class="network-section">
-      <img class="bg" src="@/assets/images/split2.png" alt="" />
-      <img class="icons" src="@/assets/images/split1.png" alt="" />
-      <span>We support various networks and power leading Web3 projects </span>
+    <section class="network-section">
+      <img class="bg" src="@/assets/images/gray-bg.png" alt="" />
+      <img class="logo" src="@/assets/images/Group_88.png" alt="" />
+      <img class="icon icon1" src="@/assets/images/litmuts.png" alt="" />
+      <img class="icon icon2" src="@/assets/images/Acala.png" alt="" />
+      <img class="icon icon3" src="@/assets/images/Frame_16.png" alt="" />
+      <img class="icon icon4" src="@/assets/images/Mask__group.png" alt="" />
+      <img class="icon icon5" src="@/assets/images/Subquery.png" alt="" />
+      <img class="icon icon6" src="@/assets/images/kusama.png" alt="" />
+      <img class="icon icon7" src="@/assets/images/Mask_group-1.png" alt="" />
+      <img class="icon icon8" src="@/assets/images/polkadot.png" alt="" />
+      <img class="icon icon9" src="@/assets/images/litentry-icon.png" alt="" />
+      <img class="icon icon10" src="@/assets/images/litentry-1.png" alt="" />
+      <img class="icon icon11" src="@/assets/images/RMRK.png" alt="" />
+      <img class="icon icon12" src="@/assets/images/biforst.png" alt="" />
+
+      <div class="text">
+        <slide-up class="inner-text">We support various networks and</slide-up>
+        <slide-up :delay="0.2" class="inner-text">
+          power leading Web3 projects
+        </slide-up>
+      </div>
     </section>
     <section class="investor-section layout">
       <div class="section-title" v-moveLeft="0">
@@ -310,7 +336,7 @@
           :key="i"
           v-moveUp="0.2 * i"
         >
-          <hover-animate-box :rotate="20">
+          <hover-animate-box :rotate="0">
             <div class="item-inner">
               <div class="img-wrap">
                 <img :src="v.image" alt="" />
@@ -555,6 +581,9 @@ export default {
       ],
     };
   },
+  created() {
+    this.createKeyFrame();
+  },
   mounted() {
     this.initAnimate();
     this.bindEvent();
@@ -568,6 +597,28 @@ export default {
     },
   },
   methods: {
+    createKeyFrame() {
+      for (let i = 0; i < 12; i++) {
+        const a = Math.random() * (Math.random > 0.5 ? 1 : -1) * 20;
+        const b = Math.random() * (Math.random > 0.5 ? 1 : -1) * 20;
+        document.styleSheets[0].insertRule(
+          "@keyframes homeBreath" +
+            (i + 1) +
+            "" +
+            "{" +
+            "0%{transform: translate(" +
+            0 +
+            "px, " +
+            0 +
+            "px)}" +
+            "100%{transform: translate(" +
+            a +
+            "px, " +
+            b +
+            "px)}"
+        );
+      }
+    },
     openVideo() {
       this.$refs.videoModal.init();
     },
@@ -605,16 +656,14 @@ export default {
       // 毛球背景掉落效果
       const bgEl = this.$refs.bigBg;
       const scrollTop = document.documentElement.scrollTop;
-      if (scrollTop < 800) {
+      if (scrollTop < 1107) {
         bgEl.style.transform = `translateY(${scrollTop}px) translateX(${
-          -scrollTop * 0.89
-        }px) scale(${1 - 0.00095 * scrollTop})`;
-        bgEl.style.opacity = 1 - 0.00125 * scrollTop;
+          -scrollTop * 0.6214995483288166
+        }px) scale(${1 - 0.00022583559168925022 * scrollTop})`;
+        bgEl.style.opacity = 1 - 0.0009033423667570009 * scrollTop;
       } else {
         bgEl.style.opacity = 0;
-        bgEl.style.transform = `translateY(${800}px) translateX(${
-          -800 * 0.89
-        }px) scale(${1 - 0.00095 * 800})`;
+        bgEl.style.transform = `translateY(${1107}px) translateX(${-688}px) scale(${0.75})`;
       }
     }, 50),
     jumpUrl(url) {
@@ -828,10 +877,13 @@ export default {
         position: absolute;
         &:hover {
           .circle {
-            transform: translateY(-50%) scale(1.2);
+            transform: translate(-50%, -50%) scale(1.2);
           }
           .rect {
-            opacity: 0.5;
+            display: none;
+          }
+          .rect2 {
+            display: block;
           }
         }
         .circle {
@@ -839,12 +891,15 @@ export default {
           width: 83px;
           position: absolute;
           top: 50%;
-          left: -30px;
-          transform: translateY(-50%);
+          left: 50%;
+          transform: translate(-50%, -50%);
           transition: all 0.3s;
         }
         .rect {
-          transition: all 0.3s;
+          width: 346px;
+        }
+        .rect2 {
+          display: none;
           width: 346px;
         }
       }
@@ -919,7 +974,7 @@ export default {
 
       .card {
         width: 377px;
-        height: 322px;
+        height: 553px;
 
         box-sizing: border-box;
         .card-title {
@@ -928,39 +983,48 @@ export default {
           color: #000000;
         }
         .split {
-          margin-top: 32px;
+          margin-top: 24px;
           width: 16px;
           height: 3px;
           background: #4318ff;
         }
         .text {
+          letter-spacing: -0.02em;
           margin-top: 16px;
-          width: 200px;
+          width: 288px;
           height: 60px;
           font-weight: 400;
           font-size: 16px;
           color: #4d5358;
         }
         .btn {
-          margin-top: 53px;
+          position: absolute;
+          bottom: 31px;
+          left: 105px;
+          width: 165px;
+          height: 44px;
           display: flex;
           align-items: center;
-
+          justify-content: center;
+          background: #4318ff;
+          box-shadow: 0px 40px 58px -20px rgba(112, 144, 176, 0.12);
+          border-radius: 70px;
           span {
-            font-weight: 700;
+            font-weight: 400;
             font-size: 14px;
-            color: #4318ff;
+            color: #ffffff;
           }
           .arrow {
-            margin-left: 10px;
-            width: 6px;
+            margin-left: 9px;
+            width: 16px;
           }
         }
+
         .animate {
           width: 255px;
           position: absolute;
-          bottom: -20px;
-          right: -36px;
+          bottom: 100px;
+          right: 58px;
           .img {
             position: relative;
             z-index: 2;
@@ -975,6 +1039,7 @@ export default {
         }
       }
       .card-inner {
+        overflow: hidden;
         cursor: pointer;
         box-sizing: border-box;
         padding: 32px;
@@ -988,24 +1053,36 @@ export default {
           background: rgba(255, 255, 255, 0.5);
           box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
           backdrop-filter: blur(10px);
+          .btn {
+            background-color: #7551ff;
+          }
         }
       }
-      // .card1 .card-inner {
-      //   background: rgba(255, 255, 255, 0.5);
-      //   box-shadow: 0px 40px 50px -20px rgba(112, 144, 176, 0.19);
-      //   backdrop-filter: blur(10px);
-      //   border-radius: 20px;
-      // }
-      // .card2 .card-inner {
-      //   background: rgba(195, 207, 243, 0.2);
-      //   backdrop-filter: blur(10px);
-      //   border-radius: 20px;
-      // }
-      // .card3 .card-inner {
-      //   background: rgba(195, 207, 243, 0.2);
-      //   backdrop-filter: blur(10px);
-      //   border-radius: 20px;
-      // }
+      .card1 {
+        .big-bg {
+          width: 500px;
+          position: absolute;
+          left: -20px;
+          opacity: 0.4;
+        }
+      }
+      .card2 {
+        .big-bg {
+          width: 450px;
+          position: absolute;
+          left: -20px;
+          top: -60px;
+          opacity: 0.4;
+        }
+      }
+      .card3 {
+        .big-bg {
+          width: 450px;
+          position: absolute;
+          left: -50px;
+          opacity: 0.4;
+        }
+      }
     }
   }
   .number-section {
@@ -1027,7 +1104,7 @@ export default {
         padding-left: 5px;
         margin-top: 4px;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 24px;
         color: #4d5358;
       }
     }
@@ -1047,24 +1124,125 @@ export default {
   .network-section {
     position: relative;
     .bg {
+      display: block;
       width: 100%;
     }
-    .icons {
-      width: 54%;
+    .logo {
+      width: 20%;
       position: absolute;
-      left: 49.6%;
-      top: 56%;
+      left: 50%;
+      top: 55%;
       transform: translate(-50%, -50%);
     }
-    span {
+    @keyframes breath {
+      from {
+        transform: translate(0, 2px);
+      }
+
+      to {
+        transform: translate(0, -2px);
+      }
+    }
+    .icon {
+      width: 4.2%;
+      position: absolute;
+    }
+    .icon1 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath1 1s ease infinite 650ms alternate;
+      left: 35.6%;
+      top: 24%;
+    }
+    .icon2 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath2 1s ease-in-out infinite 500ms alternate;
+      left: 26.6%;
+      top: 35%;
+    }
+    .icon3 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath3 1s ease-in infinite 100ms alternate;
+      left: 22.6%;
+      top: 54%;
+    }
+    .icon4 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath4 1s ease-out infinite 0ms alternate;
+      left: 31%;
+      top: 50%;
+    }
+    .icon5 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath5 1s linear infinite 100ms alternate;
+      left: 28.6%;
+      top: 70%;
+    }
+    .icon6 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath6 1s ease-out infinite 800ms alternate;
+      left: 36.6%;
+      top: 80%;
+    }
+    .icon7 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath7 1s ease infinite 400ms alternate;
+      right: 35.6%;
+      top: 24%;
+    }
+    .icon8 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath8 1s linear infinite 1000ms alternate;
+      right: 26.6%;
+      top: 35%;
+    }
+    .icon9 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath9 1s ease infinite 200ms alternate;
+      right: 22.6%;
+      top: 54%;
+    }
+    .icon10 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath10 1s ease-in infinite 100ms alternate;
+      right: 31%;
+      top: 50%;
+    }
+    .icon11 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath11 1s ease-in-out infinite 500ms alternate;
+      right: 28.6%;
+      top: 70%;
+    }
+    .icon12 {
+      width: 4.2%;
+      position: absolute;
+      animation: homeBreath12 1s ease-out infinite 600ms alternate;
+      right: 36.6%;
+      top: 80%;
+    }
+
+    .text {
+      text-align: center;
       display: block;
-      width: 700px;
+      width: 650px;
       font-weight: 500;
       font-size: 42px;
       color: #121619;
       position: absolute;
+      letter-spacing: -0.02em;
       left: 50%;
-      top: 10%;
+      top: -25px;
       transform: translateX(-50%);
     }
   }
@@ -1219,12 +1397,16 @@ export default {
         width: 303px;
         height: 297px;
         box-sizing: border-box;
+        &:hover {
+          .item-inner {
+            box-shadow: 0px 40px 58px -20px rgba(112, 144, 176, 0.2);
+          }
+        }
         .item-inner {
           cursor: pointer;
           height: 100%;
           background: #ffffff;
           border-radius: 20px;
-          box-shadow: 0px 40px 58px -20px rgba(112, 144, 176, 0.2);
         }
         .img-wrap {
           img {
