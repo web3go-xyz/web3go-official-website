@@ -92,9 +92,8 @@
       </div>
     </section>
     <section class="card-section layout">
-      <div class="section-title" v-moveLeft="0">
-        <div class="circle"></div>
-        <span> Web3Go Data Solutions </span>
+      <div class="section-title">
+        <span v-moveBig> Web3Go Data Solutions </span>
       </div>
       <!-- <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" /> -->
       <div class="card-list">
@@ -196,9 +195,9 @@
       </div>
     </section>
     <section class="number-section layout">
-      <div class="section-title" v-moveLeft="0">
+      <div class="section-title">
         <div class="circle"></div>
-        <span> 1000+ Users' intelligent data assistant </span>
+        <span v-moveBig> 1000+ Users' intelligent data assistant </span>
       </div>
       <img class="bg" src="@/assets/images/number-section.png" alt="" />
       <div class="item item1" :key="1">
@@ -244,18 +243,16 @@
       </div>
     </section>
     <section class="investor-section layout">
-      <div class="section-title" v-moveLeft="0">
-        <div class="circle"></div>
-        <span> Investors </span>
+      <div class="section-title">
+        <span v-moveBig> Investors </span>
       </div>
       <img v-moveUp="0.4" src="@/assets/images/investor.png" alt="" />
     </section>
     <section class="users-section layout">
-      <div class="section-title" v-moveLeft="0">
-        <div class="circle"></div>
-        <span> Who's using Web3Go </span>
+      <div class="section-title">
+        <span v-moveBig> Who's using Web3Go </span>
       </div>
-      <div class="subtitle" v-moveLeft="0.1">
+      <div class="subtitle">
         Prediticive modeling with one click to simulate your rewards and support
         your investing strategy
       </div>
@@ -319,9 +316,8 @@
       </div>
     </section>
     <section class="news-section layout">
-      <div class="section-title" v-moveLeft="0">
-        <div class="circle"></div>
-        <span> Trending News </span>
+      <div class="section-title">
+        <span v-moveBig> Trending News </span>
       </div>
       <div class="more-wrap">
         <div class="more">
@@ -935,9 +931,11 @@ export default {
       z-index: 1;
       position: absolute;
       display: inline-block;
-      width: 89.9px;
-      height: 89.9px;
+      width: 174.86px;
+      height: 174.86px;
       border-radius: 50%;
+      top: -25px;
+      left: -10px;
       background: linear-gradient(
         171.96deg,
         #ccc9ed 5.35%,

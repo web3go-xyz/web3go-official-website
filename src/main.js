@@ -14,6 +14,7 @@ import * as utils from '@/utils'
 import moveUp from '@/directive/moveUp';
 import moveBottom from '@/directive/moveBottom';
 import moveLeft from '@/directive/moveLeft';
+import moveBig from '@/directive/moveBig';
 import 'animate.css';
 
 // 获取保存的用户信息
@@ -32,6 +33,9 @@ app.component('v-chart', ECharts)
 app.directive('moveUp', moveUp);
 app.directive('moveBottom', moveBottom);
 app.directive('moveLeft', moveLeft);
+app.directive('moveBig', moveBig);
+
+
 
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
