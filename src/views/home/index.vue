@@ -265,9 +265,10 @@
           <div class="img-wrap" v-moveUp="0.2">
             <img class="dot" src="@/assets/images/bluedot.png" alt="" />
             <el-carousel
+              autoplay
               @change="changeSlider"
               arrow="never"
-              :interval="7000"
+              :interval="10000"
               trigger="click"
               height="546px"
               class="carousel"
@@ -580,22 +581,28 @@ export default {
       ],
       slideList: [
         {
-          image: require("@/assets/images/demoPerson.png"),
-          text: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-          name: "Flores, Juanita",
-          info: "Manager, Smart Spaces at Telus",
+          image: require("@/assets/images/Rectangle95.png"),
+          text: "As an L1 with an entire ecosystem of dapps deployed, it is challenging to understand and interpret onchain data at an aggregate level. Web3go helped us build KPIs that combine base layer blockchain metrics with dapp and smart contract level data to provide ecosystem level visbility. The Moonbeam Foundation is currently using these KPIs to grow the Moonbeam ecosystem by understanding user and token metrics and trends, identifying strategic opportunities, and measuring grant program efficacy.",
+          name: "Derek Yoo",
+          info: "Founder of MoonBeam",
         },
         {
-          image: require("@/assets/images/idStatic.png"),
-          text: "22Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-          name: "Flores, Juanita2",
-          info: "Manager, Smart Spaces at Telus2",
+          image: require("@/assets/images/Rectangle170.png"),
+          text: "Web3Go has been instrumental in our analytics and in our artists being able to tell how their collections have been performing. Their easy-to-implement on-site charts are a dream to work with, and we can’t wait to see what else they come up with!",
+          name: "Bruno Skvorc",
+          info: "Founder of RMRK",
         },
         {
-          image: require("@/assets/images/line-circle.png"),
-          text: "33Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-          name: "Flores, Juanita3",
-          info: "Manager, Smart Spaces at Telus3",
+          image: require("@/assets/images/Rectangle168.png"),
+          text: "The Web3Go team is outstanding in their speed, execution and communication as partners. This is why OAK works with them through every milestone we have, from our Kusama Crowdloan, Delegated Proof of Stake rollout, through our latest DApp competition.",
+          name: "Irsal McGinnis",
+          info: "CTO of OAK Network",
+        },
+        {
+          image: require("@/assets/images/Rectangle169.png"),
+          text: "Web3Go is an awesome tool that I can quickly use to answer and visualize any questions about what's happening on-chain.",
+          name: "James Bayly",
+          info: "Head Of Business Development at SubQuery & OnFinality",
         },
       ],
     };
@@ -734,7 +741,7 @@ export default {
         autoplay: false,
         animationData: dashboardAnimate, // the path to the animation json
       });
-      this.dashboardAnimateInstance.setSubframe(false);
+      this.dashboardAnimateInstance.setSubframe(false); 
       this.dashboardAnimateInstance.goToAndStop(4000);
       this.idAnimateInstance = lottie.loadAnimation({
         container: document.getElementById("id-animate"), // the dom element that will contain the animation
@@ -1466,6 +1473,8 @@ export default {
           border-radius: 20px;
         }
         .img-wrap {
+          border-radius: 20px 20px 0 0;
+          overflow: hidden;
           img {
             width: 303px;
             height: 171px;
