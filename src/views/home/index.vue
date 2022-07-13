@@ -246,7 +246,11 @@
       <div class="section-title">
         <span v-moveBig> Investors </span>
       </div>
-      <img v-moveUp="0.4" src="@/assets/images/investor.png" alt="" />
+      <div v-moveUp="0.4" class="logo-list">
+        <div v-for="v in 5" :key="v" class="img-wrap">
+          <img :src="require('@/assets/images/iv' + v + '.png')" alt="" />
+        </div>
+      </div>
     </section>
     <section class="users-section layout">
       <div class="section-title">
@@ -320,7 +324,7 @@
         <span v-moveBig> Trending News </span>
       </div>
       <div class="more-wrap">
-        <div class="more">
+        <div class="more" @click="jumpUrl('https://web3go.medium.com/')">
           <span>More</span>
           <img src="@/assets/images/right-arrow2.png" alt="" />
         </div>
@@ -331,6 +335,7 @@
           v-for="(v, i) in newsList"
           :key="i"
           v-moveUp="0.2 * i"
+          @click="jumpUrl(v.link)"
         >
           <hover-animate-box :rotate="0">
             <div class="item-inner">
@@ -408,7 +413,14 @@
                 alt=""
               />
             </div>
-            <div class="foundation">
+            <div
+              class="foundation"
+              @click="
+                jumpUrl(
+                  'https://github.com/w3f/Grants-Program/blob/master/applications/Web3Go.md'
+                )
+              "
+            >
               <img src="@/assets/images/Frame23.png" alt="" />
             </div>
             <div class="gray">©2021-2022 WEB3GO TECHNOLOGY PTE.LTD.</div>
@@ -417,10 +429,11 @@
             <div class="col-item">
               <div class="title">About</div>
               <div class="link">Roadmap</div>
-              <div class="link">Newsletter</div>
+              <div class="link">Privacy Policy</div>
+              <div class="link">Terms and Conditions</div>
             </div>
             <div class="col-item">
-              <div class="title">Connect</div>
+              <div class="title">Media</div>
               <div class="link" @click="jumpUrl('https://twitter.com/Web3Go')">
                 Twitter
               </div>
@@ -433,9 +446,12 @@
               <div class="link" @click="jumpUrl('https://t.me/web3go')">
                 Telegram
               </div>
+              <div class="link" @click="jumpUrl('https://web3go.medium.com/')">
+                Medium
+              </div>
             </div>
             <div class="col-item">
-              <div class="title">Learn</div>
+              <div class="title">Resources</div>
               <div class="link" @click="jumpUrl('https://doc.web3go.xyz/')">
                 Docs
               </div>
@@ -445,13 +461,16 @@
               >
                 Github
               </div>
-              <div class="link">Medium</div>
-              <div class="link">Youtube</div>
-            </div>
-            <div class="col-item">
-              <div class="title">Support</div>
-              <div class="link">Privacy Policy</div>
-              <div class="link">Terms and Conditions</div>
+              <div
+                class="link"
+                @click="
+                  jumpUrl(
+                    'https://www.youtube.com/channel/UCjsd_RBe4pyxtq_UEkxsDYQ'
+                  )
+                "
+              >
+                Youtube
+              </div>
             </div>
           </div>
         </div>
@@ -519,20 +538,24 @@ export default {
       searchValue: "",
       newsList: [
         {
-          image: require("@/assets/images/image_30.png"),
-          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+          image: require("@/assets/images/n1.png"),
+          text: "Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant",
+          link: "https://web3go.medium.com/web3go-delivered-milestone-1-for-our-web3-foundation-grant-ed3321353a83",
         },
         {
-          image: require("@/assets/images/image_30.png"),
-          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+          image: require("@/assets/images/n2.png"),
+          text: "Web3Go x Bifrost: track and simulate staking schema in Bifrost’s Collator Mechanism",
+          link: "https://web3go.medium.com/web3go-x-bifrost-track-and-simulate-staking-schema-in-bifrosts-collator-mechanism-8a911f5dc8c7",
         },
         {
-          image: require("@/assets/images/image_30.png"),
-          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+          image: require("@/assets/images/n3.png"),
+          text: "Web3Go x OAK Network: Crowdloan related data services",
+          link: "https://web3go.medium.com/web3go-x-oak-network-crowdloan-related-data-services-ad5fe7f44377",
         },
         {
-          image: require("@/assets/images/image_30.png"),
-          text: "Track and simulate staking schema in Bifost’s Collator Mechanism",
+          image: require("@/assets/images/n4.jpeg"),
+          text: "Moonbeam & Moonriver Staking Dashboards — Tracking and Simulation",
+          link: "https://web3go.medium.com/moonbeam-moonriver-staking-dashboards-tracking-and-simulation-14fcc6f7024e",
         },
       ],
       sliderIndex: 0,
@@ -1249,8 +1272,44 @@ export default {
     padding-top: 20px;
     margin-top: 200px;
     position: relative;
-    img {
-      width: 950px;
+    .logo-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 328px);
+      grid-row-gap: 20px;
+      .img-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 327px;
+        height: 70px;
+        text-align: center;
+        border-right: 1px solid rgb(218, 221, 228);
+        &:nth-of-type(1) {
+          img {
+            height: 40px;
+          }
+        }
+        &:nth-of-type(2) {
+          img {
+            height: 90px;
+          }
+        }
+        &:nth-of-type(3) {
+          img {
+            height: 71px;
+          }
+        }
+        &:nth-of-type(4) {
+          img {
+            height: 57px;
+          }
+        }
+        &:nth-of-type(5) {
+          img {
+            height: 61px;
+          }
+        }
+      }
     }
   }
   .users-section {
@@ -1414,10 +1473,30 @@ export default {
         }
         .text {
           padding: 12px 24px;
+          padding-bottom: 0;
+          margin-bottom: 10px;
           font-weight: 400;
           font-size: 16px;
           line-height: 28px;
           color: #000000;
+          position: relative;
+          height: 70px;
+          box-sizing: border-box;
+          overflow: hidden;
+          &::before {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            content: "...";
+          }
+          &:after {
+            position: absolute;
+            right: 5px;
+            width: 1em;
+            height: 2em;
+            content: "";
+            background-color: #fff;
+          }
         }
         .btn-wrap {
           padding: 0 24px;
@@ -1551,13 +1630,17 @@ export default {
           }
         }
         .foundation {
-          margin-top: 50px;
+          cursor: pointer;
+          margin-top: 39px;
+          &:hover {
+            opacity: 0.8;
+          }
           img {
-            width: 140px;
+            width: 240px;
           }
         }
         .gray {
-          margin-top: 42px;
+          margin-top: 16px;
           font-weight: 400;
           font-size: 12px;
           color: #a3aed0;
@@ -1565,6 +1648,7 @@ export default {
       }
       .i-right {
         display: flex;
+        margin-left: 110px;
         .col-item {
           margin-left: 147px;
           .title {
