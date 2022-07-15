@@ -197,24 +197,24 @@
     <section class="number-section layout">
       <div class="section-title">
         <div class="circle"></div>
-        <span v-moveBig> 1000+ Users' intelligent data assistant </span>
+        <span v-moveBig> {{numberConfig.userCount}}+ Users' intelligent data assistant </span>
       </div>
       <img class="bg" src="@/assets/images/number-section.png" alt="" />
       <div class="item item1" :key="1">
         <div class="num">
-          <number-grow ref="numberGrow1" :value="65644" />
+          <number-grow ref="numberGrow1" :value="numberConfig.PredictionCount" />
         </div>
         <div class="label">Predictions</div>
       </div>
       <div class="item item2" :key="2">
         <div class="num">
-          <number-grow ref="numberGrow2" :value="56456" />
+          <number-grow ref="numberGrow2" :value="numberConfig.AlertCount" />
         </div>
         <div class="label">Alerts</div>
       </div>
       <div class="item item3" :key="3">
         <div class="num">
-          <number-grow ref="numberGrow3" :value="8978" />
+          <number-grow ref="numberGrow3" :value="numberConfig.DashboardCount" />
         </div>
         <div class="label">Dashboards</div>
       </div>
@@ -492,10 +492,10 @@ import idAnimate from "@/assets/animateJson/id/id.json";
 import alertAnimate from "@/assets/animateJson/alert/alert.json";
 import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
 import SlideUp from "@/components/SlideUp";
-
 import throttle from "lodash.throttle";
 import VideoModal from "./VideoModal";
-
+import { webUserList, webNewsList, numberConfig } from "@/api/website";
+import { getImgPath } from "@/utils";
 codeAnimate.assets.forEach((item) => {
   item.u = "";
   if (item.w && item.h) {
@@ -530,6 +530,7 @@ export default {
   },
   data() {
     return {
+      numberConfig: {},
       codeAnimateInstance: null,
       mouseAnimateInstance: null,
       dashboardAnimateInstance: null,
@@ -537,28 +538,7 @@ export default {
       alertAnimateInstance: null,
       showScrollTip: true,
       searchValue: "",
-      newsList: [
-        {
-          image: require("@/assets/images/n1.png"),
-          text: "Web3Go Delivered Milestone 1 for Our Web3 Foundation Grant",
-          link: "https://web3go.medium.com/web3go-delivered-milestone-1-for-our-web3-foundation-grant-ed3321353a83",
-        },
-        {
-          image: require("@/assets/images/n2.png"),
-          text: "Web3Go x Bifrost: track and simulate staking schema in Bifrost’s Collator Mechanism",
-          link: "https://web3go.medium.com/web3go-x-bifrost-track-and-simulate-staking-schema-in-bifrosts-collator-mechanism-8a911f5dc8c7",
-        },
-        {
-          image: require("@/assets/images/n3.png"),
-          text: "Web3Go x OAK Network: Crowdloan related data services",
-          link: "https://web3go.medium.com/web3go-x-oak-network-crowdloan-related-data-services-ad5fe7f44377",
-        },
-        {
-          image: require("@/assets/images/n4.jpeg"),
-          text: "Moonbeam & Moonriver Staking Dashboards — Tracking and Simulation",
-          link: "https://web3go.medium.com/moonbeam-moonriver-staking-dashboards-tracking-and-simulation-14fcc6f7024e",
-        },
-      ],
+      newsList: [],
       sliderIndex: 0,
       // @click="jumpUrl('https://doc.web3go.xyz/')
       menus: [
@@ -579,36 +559,12 @@ export default {
           link: "https://github.com/web3go-xyz",
         },
       ],
-      slideList: [
-        {
-          image: require("@/assets/images/Rectangle95.png"),
-          text: "As an L1 with an entire ecosystem of dapps deployed, it is challenging to understand and interpret onchain data at an aggregate level. Web3go helped us build KPIs that combine base layer blockchain metrics with dapp and smart contract level data to provide ecosystem level visbility. The Moonbeam Foundation is currently using these KPIs to grow the Moonbeam ecosystem by understanding user and token metrics and trends, identifying strategic opportunities, and measuring grant program efficacy.",
-          name: "Derek Yoo",
-          info: "Founder of MoonBeam",
-        },
-        {
-          image: require("@/assets/images/Rectangle170.png"),
-          text: "Web3Go has been instrumental in our analytics and in our artists being able to tell how their collections have been performing. Their easy-to-implement on-site charts are a dream to work with, and we can’t wait to see what else they come up with!",
-          name: "Bruno Skvorc",
-          info: "Founder of RMRK",
-        },
-        {
-          image: require("@/assets/images/Rectangle168.png"),
-          text: "The Web3Go team is outstanding in their speed, execution and communication as partners. This is why OAK works with them through every milestone we have, from our Kusama Crowdloan, Delegated Proof of Stake rollout, through our latest DApp competition.",
-          name: "Irsal McGinnis",
-          info: "CTO of OAK Network",
-        },
-        {
-          image: require("@/assets/images/Rectangle169.png"),
-          text: "Web3Go is an awesome tool that I can quickly use to answer and visualize any questions about what's happening on-chain.",
-          name: "James Bayly",
-          info: "Head Of Business Development at SubQuery & OnFinality",
-        },
-      ],
+      slideList: [{}],
     };
   },
   created() {
     this.createKeyFrame();
+    this.getData();
   },
   mounted() {
     this.initAnimate();
@@ -623,6 +579,22 @@ export default {
     },
   },
   methods: {
+    async getData() {
+      const userListRes = await webUserList();
+      this.slideList = userListRes.rows.map((v) => ({
+        image: getImgPath(v.image),
+        text: v.name,
+        link: v.link,
+      }));
+      const newsListRes = await webNewsList();
+      this.newsList = newsListRes.rows.map((v) => ({
+        image: getImgPath(v.image),
+        text: v.name,
+        info: v.introduction,
+      }));
+      const numberConfigRes = await numberConfig();
+      this.numberConfig = numberConfigRes.rows[0];
+    },
     createKeyFrame() {
       for (let i = 0; i < 12; i++) {
         const a = Math.random() * (Math.random > 0.5 ? 1 : -1) * 20;
@@ -741,7 +713,7 @@ export default {
         autoplay: false,
         animationData: dashboardAnimate, // the path to the animation json
       });
-      this.dashboardAnimateInstance.setSubframe(false); 
+      this.dashboardAnimateInstance.setSubframe(false);
       this.dashboardAnimateInstance.goToAndStop(4000);
       this.idAnimateInstance = lottie.loadAnimation({
         container: document.getElementById("id-animate"), // the dom element that will contain the animation

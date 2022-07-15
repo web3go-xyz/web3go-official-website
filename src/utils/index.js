@@ -232,3 +232,6 @@ export async function loadAddressIdentityAsync(addressInfo) {
 
 
 };
+export function getImgPath(str) {
+    return window.IMG_PREFIX + str;
+}

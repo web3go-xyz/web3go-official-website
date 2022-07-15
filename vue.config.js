@@ -59,5 +59,25 @@ module.exports = {
     //         })
 
     // }
-
+    devServer: {
+        host: '0.0.0.0',
+        // proxy: {
+        //     // detail: https://cli.vuejs.org/config/#devserver-proxy
+        //     '/': {
+        //         target: `https://web3go.xyz/backconfig-api`,
+        //         changeOrigin: true,
+        //         logLevel: 'debug'
+        //     }
+        // },
+        proxy: {
+            // detail: https://cli.vuejs.org/config/#devserver-proxy
+            '/prod-api': {
+                target: `http://13.251.111.178:8081`,
+                changeOrigin: true,
+                secure: false,
+                logLevel: 'debug',
+            }
+        },
+        disableHostCheck: true
+    },
 }

@@ -1,1 +1,3 @@
-window.BASE_API = "http://16.163.5.216:8082";
+// window.BASE_API = "https://web3go.xyz/backconfig-api";
+window.BASE_API = "/prod-api";
+window.IMG_PREFIX = 'https://web3go.xyz/resources/images'
