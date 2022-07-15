@@ -265,10 +265,10 @@
           <div class="img-wrap" v-moveUp="0.2">
             <img class="dot" src="@/assets/images/bluedot.png" alt="" />
             <el-carousel
-              autoplay
+              :autoplay="autoplay"
               @change="changeSlider"
               arrow="never"
-              :interval="10000"
+              :interval="7000"
               trigger="click"
               height="546px"
               class="carousel"
@@ -286,7 +286,11 @@
           <div class="icon-wrap">
             <img src="@/assets/images/doticon.png" alt="" />
           </div>
-          <slide-up ref="slideTextRef1" class="words">
+          <slide-up
+            ref="slideTextRef1"
+            class="words"
+            :class="{ small: currentSlider.smallText }"
+          >
             {{ currentSlider.text }}
           </slide-up>
           <div class="m-bottom">
@@ -531,6 +535,7 @@ export default {
   data() {
     return {
       numberConfig: {},
+      autoplay: true,
       codeAnimateInstance: null,
       mouseAnimateInstance: null,
       dashboardAnimateInstance: null,
@@ -557,6 +562,10 @@ export default {
         {
           name: "Github",
           link: "https://github.com/web3go-xyz",
+        },
+        {
+          name: "Media Kit",
+          link: "https://drive.google.com/drive/u/2/folders/1lY-d2xA0HMoJXw87Gf5cgjH4S7TSwHpY",
         },
       ],
       slideList: [{}],
@@ -635,6 +644,8 @@ export default {
             behavior: "smooth",
           });
         }, 100);
+      } else {
+        this.jumpUrl(v.link);
       }
     },
     bindEvent() {
@@ -672,9 +683,11 @@ export default {
     },
     pre() {
       this.$refs.carousel.prev();
+      this.autoplay = false;
     },
     next() {
       this.$refs.carousel.next();
+      this.autoplay = false;
     },
     changeSlider(index) {
       this.sliderIndex = index;
@@ -1344,15 +1357,22 @@ export default {
           }
         }
         .words {
+          font-size: 19px;
           margin-top: 20px;
           width: 650px;
+          height: 400px;
           font-weight: 400;
           font-size: 34px;
           color: #21272a;
           line-height: 56px;
+          &.small {
+            ::v-deep(.inner) {
+              font-size: 20px;
+            }
+          }
         }
         .m-bottom {
-          margin-top: 150px;
+          margin-top: 40px;
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
