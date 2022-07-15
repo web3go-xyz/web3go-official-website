@@ -14,7 +14,12 @@
             {{ v.name }}
             <!-- <font-flow :text="v.name"></font-flow> -->
           </div>
-          <el-button class="btn" type="primary">Start Today</el-button>
+          <el-button
+            class="btn"
+            type="primary"
+            @click="jumpUrl('https://app.web3go.xyz/')"
+            >Start Today</el-button
+          >
         </div>
       </div>
     </div>
@@ -35,7 +40,11 @@
         </div>
         <div class="btn-wrap" v-moveUp="0.8">
           <img class="btn-bg" src="@/assets/images/btn-bg.png" alt="" />
-          <el-button class="btn" type="primary">
+          <el-button
+            @click="jumpUrl('https://app.web3go.xyz/')"
+            class="btn"
+            type="primary"
+          >
             <span>Start</span>
             <img class="arrow" src="@/assets/images/arrowRight.png" alt="" />
           </el-button>
@@ -97,7 +106,11 @@
       </div>
       <!-- <img class="circle-bg" src="@/assets/images/line-circle.png" alt="" /> -->
       <div class="card-list">
-        <div class="card card1" v-moveUp="0.2">
+        <div
+          class="card card1"
+          @click="jumpUrl('https://app.web3go.xyz/')"
+          v-moveUp="0.2"
+        >
           <hover-animate-box
             :rotate="0"
             @mouseenter="animateStart('dashboardAnimateInstance')"
@@ -123,7 +136,11 @@
             </div>
           </hover-animate-box>
         </div>
-        <div class="card card2" v-moveUp="0.5">
+        <div
+          class="card card2"
+          @click="jumpUrl('https://moonid.web3go.xyz/')"
+          v-moveUp="0.5"
+        >
           <hover-animate-box
             @mouseenter="animateStart('idAnimateInstance')"
             @mouseleave="animateStop('idAnimateInstance', 0)"
@@ -166,7 +183,11 @@
             </template>
           </hover-animate-box>
         </div>
-        <div class="card card3" v-moveUp="0.8">
+        <div
+          class="card card3"
+          @click="jumpUrl('https://moonpush.web3go.xyz/')"
+          v-moveUp="0.8"
+        >
           <hover-animate-box
             @mouseenter="animateStart('alertAnimateInstance')"
             @mouseleave="animateStop('alertAnimateInstance')"
@@ -197,12 +218,17 @@
     <section class="number-section layout">
       <div class="section-title">
         <div class="circle"></div>
-        <span v-moveBig> {{numberConfig.userCount}}+ Users' intelligent data assistant </span>
+        <span v-moveBig>
+          {{ numberConfig.userCount }}+ Users' intelligent data assistant
+        </span>
       </div>
       <img class="bg" src="@/assets/images/number-section.png" alt="" />
       <div class="item item1" :key="1">
         <div class="num">
-          <number-grow ref="numberGrow1" :value="numberConfig.PredictionCount" />
+          <number-grow
+            ref="numberGrow1"
+            :value="numberConfig.PredictionCount"
+          />
         </div>
         <div class="label">Predictions</div>
       </div>
@@ -590,16 +616,18 @@ export default {
   methods: {
     async getData() {
       const userListRes = await webUserList();
-      this.slideList = userListRes.rows.map((v) => ({
+      this.slideList = userListRes.rows.map((v, i) => ({
         image: getImgPath(v.image),
-        text: v.name,
-        link: v.link,
+        smallText: v.article.length > 450,
+        text: v.article,
+        name: v.name,
+        info: v.introduction,
       }));
       const newsListRes = await webNewsList();
       this.newsList = newsListRes.rows.map((v) => ({
         image: getImgPath(v.image),
         text: v.name,
-        info: v.introduction,
+        link: v.link,
       }));
       const numberConfigRes = await numberConfig();
       this.numberConfig = numberConfigRes.rows[0];
