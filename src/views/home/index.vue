@@ -106,7 +106,7 @@
           <div class="i-right">
             <div class="col-item">
               <div class="title">About</div>
-              <div class="link">Roadmap</div>
+              <div class="link" @click="jumpUrl('https://zealous-pufferfish-7e6.notion.site/a2552d2b97e14c498a9ddef3edbb9161?v=5d8fd89aaee0443695f8f8bb96b82c9b')">Roadmap</div>
               <div class="link" @click="jumpToArticle('Privacy Policy')">
                 Privacy Policy
               </div>

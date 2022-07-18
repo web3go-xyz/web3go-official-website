@@ -2,6 +2,7 @@
   <div class="article-wrap layout">
     <div v-if="$route.query.article == 'Privacy Policy'">
       <h1>Privacy Policy</h1>
+      <h2>Last updated: 15.July.2022</h2>
       <p>
         Please read this Privacy Policy carefully before using the Web3Go
         websites, including [https://web3go.xyz](http://web3go.xyz) and all
@@ -162,7 +163,8 @@
       <h2>Last updated: 15.July.2022</h2>
     </div>
     <div v-if="$route.query.article == 'Terms and Conditions'">
-      <h1>Content_TC</h1>
+      <h1>Terms and Conditions</h1>
+      <h2>Last updated: 15.July.2022</h2>
       <p>
         Please read these Terms and Conditions ( "Terms", "Terms and Conditions"
         ) carefully before using the Web3Go websites, including
