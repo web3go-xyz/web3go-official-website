@@ -162,9 +162,11 @@
 </template>
 
 <script>
+import { addEmail } from "@/api/website";
 export default {
   data() {
     return {
+      inputValue: "",
       menus: [
         {
           name: "Solutions",
@@ -172,7 +174,7 @@ export default {
         },
         {
           name: "News",
-          link: "",
+          link: "https://web3go.medium.com/",
         },
         {
           name: "Docs",
@@ -206,11 +208,20 @@ export default {
   },
   methods: {
     subscribe() {
+      if (!this.inputValue) {
+        return;
+      }
       addEmail({
         email: this.inputValue,
       }).then((d) => {
-        this.inputValue = "";
-        this.$message.success("Thanks for subscription!");
+        if (d.code == 200) {
+          this.inputValue = "";
+          this.$message.success({
+            message: "Thanks for subscription!",
+            showClose: true,
+            duration: 100000,
+          });
+        }
       });
     },
     jumpToArticle(str) {
@@ -235,22 +246,6 @@ export default {
             name: "main",
             params: {
               scrollTop: 1000,
-            },
-          });
-        }
-      } else if (v.name == "News") {
-        if (this.$route.name == "main") {
-          setTimeout(() => {
-            window.scrollTo({
-              top: 4420,
-              behavior: "smooth",
-            });
-          }, 100);
-        } else {
-          this.$router.push({
-            name: "main",
-            params: {
-              scrollTop: 4420,
             },
           });
         }

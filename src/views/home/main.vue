@@ -420,7 +420,6 @@ export default {
       idAnimateInstance: null,
       alertAnimateInstance: null,
       showScrollTip: true,
-      searchValue: "",
       newsList: [],
       sliderIndex: 0,
       // @click="jumpUrl('https://doc.web3go.xyz/')
@@ -1163,7 +1162,7 @@ export default {
         font-size: 19px;
         margin-top: 20px;
         width: 650px;
-        height: 400px;
+        height: 490px;
         font-weight: 400;
         font-size: 34px;
         color: #21272a;
@@ -1286,21 +1285,10 @@ export default {
         position: relative;
         height: 70px;
         box-sizing: border-box;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
         overflow: hidden;
-        &::before {
-          position: absolute;
-          right: 5px;
-          bottom: 5px;
-          content: "...";
-        }
-        &:after {
-          position: absolute;
-          right: 5px;
-          width: 1em;
-          height: 2em;
-          content: "";
-          background-color: #fff;
-        }
       }
       .btn-wrap {
         padding: 0 24px;
