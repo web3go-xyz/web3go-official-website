@@ -219,7 +219,7 @@ export default {
           this.$message.success({
             message: "Thanks for subscription!",
             showClose: true,
-            duration: 100000,
+            duration: 3000,
           });
         }
       });
