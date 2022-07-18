@@ -387,7 +387,7 @@
         <div class="search-wrap">
           <div class="search">
             <el-input
-              v-model="searchValue"
+              v-model="inputValue"
               placeholder="Enter your email to get latest Web3go News!"
             />
             <svg class="rect" width="50" height="80">
@@ -398,7 +398,7 @@
               />
             </svg>
           </div>
-          <div class="btn">
+          <div class="btn" @click="subscribe">
             <svg class="rect" width="340" height="80">
               <polygon
                 class="triangle"
@@ -524,7 +524,12 @@ import mouseAnimate from "@/assets/animateJson/mouse/mouse.json";
 import SlideUp from "@/components/SlideUp";
 import throttle from "lodash.throttle";
 import VideoModal from "./VideoModal";
-import { webUserList, webNewsList, numberConfig } from "@/api/website";
+import {
+  webUserList,
+  webNewsList,
+  numberConfig,
+  addEmail,
+} from "@/api/website";
 import { getImgPath } from "@/utils";
 codeAnimate.assets.forEach((item) => {
   item.u = "";
@@ -568,7 +573,7 @@ export default {
       idAnimateInstance: null,
       alertAnimateInstance: null,
       showScrollTip: true,
-      searchValue: "",
+      inputValue: "",
       newsList: [],
       sliderIndex: 0,
       // @click="jumpUrl('https://doc.web3go.xyz/')
@@ -614,6 +619,14 @@ export default {
     },
   },
   methods: {
+    subscribe() {
+      addEmail({
+        email: this.inputValue,
+      }).then((d) => {
+        this.inputValue = "";
+        this.$message.success("Thanks for subscription!");
+      });
+    },
     async getData() {
       const userListRes = await webUserList();
       this.slideList = userListRes.rows.map((v, i) => ({
@@ -662,13 +675,6 @@ export default {
         setTimeout(() => {
           window.scrollTo({
             top: 1000,
-            behavior: "smooth",
-          });
-        }, 100);
-      } else if (v.name == "News") {
-        setTimeout(() => {
-          window.scrollTo({
-            top: 4420,
             behavior: "smooth",
           });
         }, 100);

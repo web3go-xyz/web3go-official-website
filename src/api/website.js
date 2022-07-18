@@ -21,3 +21,12 @@ export function numberConfig(data) {
         data
     })
 }
+
+// 新增
+export function addEmail(data) {
+    return request({
+        url: '/website/subscribeManage',
+        method: 'post',
+        data: data
+    })
+}
