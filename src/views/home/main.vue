@@ -466,22 +466,31 @@ export default {
   },
   methods: {
     async getData() {
-      const userListRes = await webUserList();
-      this.slideList = userListRes.rows.map((v, i) => ({
-        image: getImgPath(v.image),
-        smallText: v.article.length > 450,
-        text: v.article,
-        name: v.name,
-        info: v.introduction,
-      }));
-      const newsListRes = await webNewsList();
-      this.newsList = newsListRes.rows.map((v) => ({
-        image: getImgPath(v.image),
-        text: v.name,
-        link: v.link,
-      }));
-      const numberConfigRes = await numberConfig();
-      this.numberConfig = numberConfigRes.rows[0];
+      webUserList().then((userListRes) => {
+        this.slideList = userListRes.rows.map((v, i) => ({
+          image: getImgPath(v.image),
+          smallText: v.article.length > 450,
+          text: v.article,
+          name: v.name,
+          info: v.introduction,
+        }));
+      });
+      webNewsList().then((newsListRes) => {
+        this.newsList = newsListRes.rows.map((v) => ({
+          image: getImgPath(v.image),
+          text: v.name,
+          link: v.link,
+        }));
+      });
+      numberConfig().then((numberConfigRes) => {
+        this.numberConfig = numberConfigRes.rows[0];
+        this.$nextTick(() => {
+          // 数字滚动
+          this.$refs.numberGrow1.handleWindowScroll();
+          this.$refs.numberGrow2.handleWindowScroll();
+          this.$refs.numberGrow3.handleWindowScroll();
+        });
+      });
     },
     createKeyFrame() {
       for (let i = 0; i < 12; i++) {
@@ -520,9 +529,11 @@ export default {
         this.showScrollTip = true;
       }
       // 数字滚动
-      this.$refs.numberGrow1.handleWindowScroll();
-      this.$refs.numberGrow2.handleWindowScroll();
-      this.$refs.numberGrow3.handleWindowScroll();
+      if (this.numberConfig.userCount) {
+        this.$refs.numberGrow1.handleWindowScroll();
+        this.$refs.numberGrow2.handleWindowScroll();
+        this.$refs.numberGrow3.handleWindowScroll();
+      }
       // 毛球背景掉落效果
       const bgEl = this.$refs.bigBg;
       const scrollTop = document.documentElement.scrollTop;
