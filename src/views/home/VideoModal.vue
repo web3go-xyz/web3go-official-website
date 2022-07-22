@@ -13,7 +13,7 @@
       ref="video"
       autoplay
       class="video"
-      src="https://e-money.com/video/blockDashboard/dashboard.mp4"
+      src="@/assets/video.mp4"
       controls="controls"
     >
       your browser does not support the video tag
