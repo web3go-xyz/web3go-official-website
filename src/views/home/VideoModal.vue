@@ -1,5 +1,5 @@
 <template>
-  <el-dialog custom-class="home-video-dialog" v-model="visible" fullscreen>
+  <el-dialog destroy-on-close custom-class="home-video-dialog" v-model="visible" fullscreen>
     <el-button
       @click="visible = false"
       class="close"
@@ -7,17 +7,26 @@
       :icon="CloseBold"
       circle
     />
-    <div v-show="!canplay" class="bg" v-loading="!canplay"></div>
+    <!-- <div v-show="!canplay" class="bg" v-loading="!canplay"></div>
     <video
       v-show="canplay"
       ref="video"
       autoplay
       class="video"
-      src="@/assets/video.mp4"
+      src="https://www.youtube.com/embed/nWPv2bv-HiI"
       controls="controls"
     >
       your browser does not support the video tag
-    </video>
+    </video> -->
+    <iframe
+      width="80%"
+      height="80%"
+      src="https://www.youtube.com/embed/nWPv2bv-HiI"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
   </el-dialog>
 </template>
 
