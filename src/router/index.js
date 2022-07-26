@@ -39,7 +39,7 @@ router.beforeEach((to, from) => {
 
         setTimeout(() => {
             console.warn('redirect to app.web3go.xyz');
-            window.location.href = 'https://app.web3go.xyz/#' + to.path;
+            window.location.href = 'https://app.web3go.xyz/' + to.href;
         }, 200);
     }
 
