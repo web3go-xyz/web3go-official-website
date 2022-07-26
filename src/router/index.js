@@ -30,4 +30,20 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from) => {
+    console.log(`from:`, from);
+    console.log(`to:`, to);
+
+    if (to.path && to.path.length > 2 && to.path.toLowerCase().startsWith('/home') == false) {
+        console.warn('not home');
+
+        setTimeout(() => {
+            console.warn('redirect to app.web3go.xyz');
+            window.location.href = 'https://app.web3go.xyz/#' + to.path;
+        }, 200);
+    }
+
+    return true
+});
+
 export default router
