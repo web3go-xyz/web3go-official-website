@@ -86,7 +86,7 @@
               />
               <img
                 title="Telegram"
-                @click="jumpUrl('https://t.me/web3go')"
+                @click="jumpUrl('https://t.me/Web3GoCommunity')"
                 src="@/assets/images/Vector(13).png"
                 alt=""
               />
@@ -134,7 +134,7 @@
               >
                 Discord
               </div>
-              <div class="link" @click="jumpUrl('https://t.me/web3go')">
+              <div class="link" @click="jumpUrl('https://t.me/Web3GoCommunity')">
                 Telegram
               </div>
               <div class="link" @click="jumpUrl('https://web3go.medium.com/')">
