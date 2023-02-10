@@ -29,6 +29,12 @@
       </div>
     </div>
     <router-view></router-view>
+    <div class="fixed-right-menu">
+      <div v-for="(v, i) in fixedRightMenu" :key="i" class="item hover-item">
+        <img @click="jumpUrl(v.link)" :src="v.img" alt="" />
+        <div class="split"></div>
+      </div>
+    </div>
     <div class="page-footer" :class="{ article: $route.name == 'article' }">
       <div class="layout">
         <div class="search-wrap">
@@ -134,7 +140,10 @@
               >
                 Discord
               </div>
-              <div class="link" @click="jumpUrl('https://t.me/Web3GoCommunity')">
+              <div
+                class="link"
+                @click="jumpUrl('https://t.me/Web3GoCommunity')"
+              >
                 Telegram
               </div>
               <div class="link" @click="jumpUrl('https://web3go.medium.com/')">
@@ -175,6 +184,32 @@ import { addEmail } from "@/api/website";
 export default {
   data() {
     return {
+      fixedRightMenu: [
+        {
+          link: "https://github.com/web3go-xyz",
+          img: require("@/assets/images/Framef31.png"),
+        },
+        {
+          link: "https://t.me/Web3GoCommunity",
+          img: require("@/assets/images/Framef29.png"),
+        },
+        {
+          link: "https://twitter.com/Web3Go",
+          img: require("@/assets/images/Framef30.png"),
+        },
+        {
+          link: "https://discord.gg/NTrHSqyuRg",
+          img: require("@/assets/images/Framef28.png"),
+        },
+        {
+          link: "https://www.binance.com/en/live/u/40429244",
+          img: require("@/assets/images/live-icon-yellow1.png"),
+        },
+        {
+          link: "https://www.binance.com/en/feed/profile/23231592",
+          img: require("@/assets/images/live-icon-yellow2.png"),
+        },
+      ],
       inputValue: "",
       menus: [
         {
@@ -336,6 +371,34 @@ export default {
           padding: 0 36px;
           margin-left: 20px;
         }
+      }
+    }
+  }
+  .fixed-right-menu {
+    z-index: 10;
+    padding: 10px;
+    background: #ffffff;
+    box-shadow: 0px 11px 13px rgba(160, 156, 185, 0.09);
+    border-radius: 12px;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px;
+    .item {
+      text-align: center;
+      &:last-child {
+        .split {
+          display: none;
+        }
+      }
+      img {
+        display: block;
+        width: 40px;
+      }
+      .split {
+        margin: 8px 4px;
+        height: 0;
+        border-bottom: 1px dashed #e5e6e8;
       }
     }
   }
