@@ -250,6 +250,9 @@
         <span v-moveBig> Investors </span>
       </div>
       <div v-moveUp="0.4" class="logo-list">
+        <div class="img-wrap">
+          <img :src="require('@/assets/images/image43.png')" alt="" />
+        </div>
         <div v-for="v in 5" :key="v" class="img-wrap">
           <img :src="require('@/assets/images/iv' + v + '.png')" alt="" />
         </div>
@@ -1091,25 +1094,30 @@ export default {
       border-right: 1px solid rgb(218, 221, 228);
       &:nth-of-type(1) {
         img {
-          height: 40px;
+          height: 56px;
         }
       }
       &:nth-of-type(2) {
         img {
-          height: 90px;
+          height: 40px;
         }
       }
       &:nth-of-type(3) {
         img {
-          height: 71px;
+          height: 90px;
         }
       }
       &:nth-of-type(4) {
         img {
-          height: 57px;
+          height: 71px;
         }
       }
       &:nth-of-type(5) {
+        img {
+          height: 57px;
+        }
+      }
+      &:nth-of-type(6) {
         img {
           height: 61px;
         }
