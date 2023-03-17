@@ -72,10 +72,10 @@
               <img src="@/assets/images/logo(3).png" alt="" />
             </div>
 
-            <div className="binance">
+            <div class="binance">
               <img src="@/assets/images/image43.png" alt="" />
               <div
-                className="grant foundation"
+                class="grant foundation"
                 @click="
                   jumpUrl(
                     'https://github.com/w3f/Grants-Program/blob/master/applications/Web3Go.md'
